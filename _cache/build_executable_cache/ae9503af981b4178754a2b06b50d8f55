@@ -1,0 +1,30 @@
+-+- CLOCK_MONOTONIC
+defined: 1
+value: 1
+---
+-+- CLOCK_MONOTONIC_RAW
+defined: 1
+value: 4
+---
+-+- CLOCK_PROCESS_CPUTIME_ID
+defined: 1
+value: 2
+---
+-+- CLOCK_REALTIME
+defined: 1
+value: 0
+---
+-+- CLOCK_THREAD_CPUTIME_ID
+defined: 1
+value: 3
+---
+-+- TIMESPEC
+align: 4
+size: 8
+fldofs tv_sec: 0
+fldsize tv_sec: 4
+fldunsigned tv_sec: 0
+fldofs tv_nsec: 4
+fldsize tv_nsec: 4
+fldunsigned tv_nsec: 0
+---

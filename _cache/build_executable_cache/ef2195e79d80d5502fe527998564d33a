@@ -1,0 +1,65 @@
+-+- DBL_DIG
+defined: 1
+value: 15
+---
+-+- DBL_EPSILON
+defined: 1
+value_0: 0
+value_1: 0
+value_2: 0
+value_3: 0
+value_4: 0
+value_5: 0
+value_6: 176
+value_7: 60
+---
+-+- DBL_MANT_DIG
+defined: 1
+value: 53
+---
+-+- DBL_MAX
+defined: 1
+value_0: 255
+value_1: 255
+value_2: 255
+value_3: 255
+value_4: 255
+value_5: 255
+value_6: 239
+value_7: 127
+---
+-+- DBL_MAX_10_EXP
+defined: 1
+value: 308
+---
+-+- DBL_MAX_EXP
+defined: 1
+value: 1024
+---
+-+- DBL_MIN
+defined: 1
+value_0: 0
+value_1: 0
+value_2: 0
+value_3: 0
+value_4: 0
+value_5: 0
+value_6: 16
+value_7: 0
+---
+-+- DBL_MIN_10_EXP
+defined: 1
+value: -307
+---
+-+- DBL_MIN_EXP
+defined: 1
+value: -1021
+---
+-+- FLT_RADIX
+defined: 1
+value: 2
+---
+-+- FLT_ROUNDS
+defined: 1
+value: 1
+---

@@ -1,0 +1,54 @@
+-+- METH_CLASS
+value: 16
+---
+-+- METH_COEXIST
+value: 64
+---
+-+- METH_KEYWORDS
+value: 2
+---
+-+- METH_NOARGS
+value: 4
+---
+-+- METH_O
+value: 8
+---
+-+- METH_STATIC
+value: 32
+---
+-+- METH_VARARGS
+value: 1
+---
+-+- Py_EQ
+value: 2
+---
+-+- Py_GE
+value: 5
+---
+-+- Py_GT
+value: 4
+---
+-+- Py_LE
+value: 1
+---
+-+- Py_LT
+value: 0
+---
+-+- Py_NE
+value: 3
+---
+-+- Py_TPFLAGS_HAVE_CLASS
+value: 256
+---
+-+- Py_TPFLAGS_HAVE_GETCHARBUFFER
+value: 1
+---
+-+- Py_TPFLAGS_HEAPTYPE
+value: 512
+---
+-+- Py_TPFLAGS_READY
+value: 4096
+---
+-+- Py_TPFLAGS_READYING
+value: 8192
+---

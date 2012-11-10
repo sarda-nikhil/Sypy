@@ -1,0 +1,1257 @@
+-+- AD_DECnet
+defined: 0
+---
+-+- AF_AAL5
+defined: 0
+---
+-+- AF_APPLETALK
+defined: 1
+value: 5
+---
+-+- AF_ASH
+defined: 1
+value: 18
+---
+-+- AF_ATMPVC
+defined: 1
+value: 8
+---
+-+- AF_ATMSVC
+defined: 1
+value: 20
+---
+-+- AF_AX25
+defined: 1
+value: 3
+---
+-+- AF_BLUETOOTH
+defined: 1
+value: 31
+---
+-+- AF_BRIDGE
+defined: 1
+value: 7
+---
+-+- AF_ECONET
+defined: 1
+value: 19
+---
+-+- AF_INET
+defined: 1
+value: 2
+---
+-+- AF_INET6
+defined: 1
+value: 10
+---
+-+- AF_IPX
+defined: 1
+value: 4
+---
+-+- AF_IRDA
+defined: 1
+value: 23
+---
+-+- AF_KEY
+defined: 1
+value: 15
+---
+-+- AF_LLC
+defined: 1
+value: 26
+---
+-+- AF_NETBEUI
+defined: 1
+value: 13
+---
+-+- AF_NETLINK
+defined: 1
+value: 16
+---
+-+- AF_NETROM
+defined: 1
+value: 6
+---
+-+- AF_PACKET
+defined: 1
+value: 17
+---
+-+- AF_PPPOX
+defined: 1
+value: 24
+---
+-+- AF_ROSE
+defined: 1
+value: 11
+---
+-+- AF_ROUTE
+defined: 1
+value: 16
+---
+-+- AF_SECURITY
+defined: 1
+value: 14
+---
+-+- AF_SNA
+defined: 1
+value: 22
+---
+-+- AF_UNIX
+defined: 1
+value: 1
+---
+-+- AF_UNSPEC
+defined: 1
+value: 0
+---
+-+- AF_WANPIPE
+defined: 1
+value: 25
+---
+-+- AF_X25
+defined: 1
+value: 9
+---
+-+- AI_ADDRCONFIG
+defined: 1
+value: 32
+---
+-+- AI_ALL
+defined: 1
+value: 16
+---
+-+- AI_CANONNAME
+defined: 1
+value: 2
+---
+-+- AI_DEFAULT
+defined: 0
+---
+-+- AI_MASK
+defined: 0
+---
+-+- AI_NUMERICHOST
+defined: 1
+value: 4
+---
+-+- AI_NUMERICSERV
+defined: 1
+value: 1024
+---
+-+- AI_PASSIVE
+defined: 1
+value: 1
+---
+-+- AI_V4MAPPED
+defined: 1
+value: 8
+---
+-+- AI_V4MAPPED_CFG
+defined: 0
+---
+-+- BTPROTO_L2CAP
+defined: 0
+---
+-+- BTPROTO_RFCOMM
+defined: 0
+---
+-+- BTPROTO_SCO
+defined: 0
+---
+-+- EAFNOSUPPORT
+defined: 1
+value: 97
+---
+-+- EAI_ADDRFAMILY
+defined: 1
+value: -9
+---
+-+- EAI_AGAIN
+defined: 1
+value: -3
+---
+-+- EAI_BADFLAGS
+defined: 1
+value: -1
+---
+-+- EAI_BADHINTS
+defined: 0
+---
+-+- EAI_FAIL
+defined: 1
+value: -4
+---
+-+- EAI_FAMILY
+defined: 1
+value: -6
+---
+-+- EAI_MAX
+defined: 0
+---
+-+- EAI_MEMORY
+defined: 1
+value: -10
+---
+-+- EAI_NODATA
+defined: 1
+value: -5
+---
+-+- EAI_NONAME
+defined: 1
+value: -2
+---
+-+- EAI_OVERFLOW
+defined: 1
+value: -12
+---
+-+- EAI_PROTOCOL
+defined: 0
+---
+-+- EAI_SERVICE
+defined: 1
+value: -8
+---
+-+- EAI_SOCKTYPE
+defined: 1
+value: -7
+---
+-+- EAI_SYSTEM
+defined: 1
+value: -11
+---
+-+- EINPROGRESS
+defined: 1
+value: 115
+---
+-+- EINTR
+defined: 1
+value: 4
+---
+-+- EISCONN
+defined: 1
+value: 106
+---
+-+- EWOULDBLOCK
+defined: 1
+value: 11
+---
+-+- FD_ACCEPT
+defined: 0
+---
+-+- FD_CLOSE
+defined: 0
+---
+-+- FD_CLOSE_BIT
+defined: 0
+---
+-+- FD_CONNECT
+defined: 0
+---
+-+- FD_CONNECT_BIT
+defined: 0
+---
+-+- FD_READ
+defined: 0
+---
+-+- FD_SETSIZE
+defined: 1
+value: 1024
+---
+-+- FD_WRITE
+defined: 0
+---
+-+- FIONBIO
+defined: 1
+value: 21537
+---
+-+- F_GETFL
+defined: 1
+value: 3
+---
+-+- F_SETFL
+defined: 1
+value: 4
+---
+-+- INADDR_ALLHOSTS_GROUP
+defined: 1
+value: 3758096385
+---
+-+- INADDR_ANY
+defined: 1
+value: 0
+---
+-+- INADDR_BROADCAST
+defined: 1
+value: 4294967295
+---
+-+- INADDR_LOOPBACK
+defined: 1
+value: 2130706433
+---
+-+- INADDR_MAX_LOCAL_GROUP
+defined: 1
+value: 3758096639
+---
+-+- INADDR_NONE
+defined: 1
+value: 4294967295
+---
+-+- INADDR_UNSPEC_GROUP
+defined: 1
+value: 3758096384
+---
+-+- INET6_ADDRSTRLEN
+defined: 1
+value: 46
+---
+-+- INET_ADDRSTRLEN
+defined: 1
+value: 16
+---
+-+- INFINITE
+defined: 0
+---
+-+- INVALID_SOCKET
+defined: 0
+---
+-+- IPPORT_RESERVED
+defined: 1
+value: 1024
+---
+-+- IPPORT_USERRESERVED
+defined: 0
+---
+-+- IPPROTO_AH
+defined: 1
+value: 51
+---
+-+- IPPROTO_BIP
+defined: 0
+---
+-+- IPPROTO_DSTOPTS
+defined: 1
+value: 60
+---
+-+- IPPROTO_EGP
+defined: 1
+value: 8
+---
+-+- IPPROTO_EON
+defined: 0
+---
+-+- IPPROTO_ESP
+defined: 1
+value: 50
+---
+-+- IPPROTO_FRAGMENT
+defined: 1
+value: 44
+---
+-+- IPPROTO_GGP
+defined: 0
+---
+-+- IPPROTO_GRE
+defined: 1
+value: 47
+---
+-+- IPPROTO_HELLO
+defined: 0
+---
+-+- IPPROTO_HOPOPTS
+defined: 1
+value: 0
+---
+-+- IPPROTO_ICMP
+defined: 1
+value: 1
+---
+-+- IPPROTO_ICMPV6
+defined: 1
+value: 58
+---
+-+- IPPROTO_IDP
+defined: 1
+value: 22
+---
+-+- IPPROTO_IGMP
+defined: 1
+value: 2
+---
+-+- IPPROTO_IP
+defined: 1
+value: 0
+---
+-+- IPPROTO_IPCOMP
+defined: 0
+---
+-+- IPPROTO_IPIP
+defined: 1
+value: 4
+---
+-+- IPPROTO_IPV4
+defined: 0
+---
+-+- IPPROTO_IPV6
+defined: 1
+value: 41
+---
+-+- IPPROTO_MAX
+defined: 0
+---
+-+- IPPROTO_MOBILE
+defined: 0
+---
+-+- IPPROTO_ND
+defined: 0
+---
+-+- IPPROTO_NONE
+defined: 1
+value: 59
+---
+-+- IPPROTO_PIM
+defined: 1
+value: 103
+---
+-+- IPPROTO_PUP
+defined: 1
+value: 12
+---
+-+- IPPROTO_RAW
+defined: 1
+value: 255
+---
+-+- IPPROTO_ROUTING
+defined: 1
+value: 43
+---
+-+- IPPROTO_RSVP
+defined: 1
+value: 46
+---
+-+- IPPROTO_TCP
+defined: 1
+value: 6
+---
+-+- IPPROTO_TP
+defined: 1
+value: 29
+---
+-+- IPPROTO_UDP
+defined: 1
+value: 17
+---
+-+- IPPROTO_VRRP
+defined: 0
+---
+-+- IPPROTO_XTP
+defined: 0
+---
+-+- IPV6_CHECKSUM
+defined: 1
+value: 7
+---
+-+- IPV6_DONTFRAG
+defined: 0
+---
+-+- IPV6_DSTOPTS
+defined: 1
+value: 59
+---
+-+- IPV6_HOPLIMIT
+defined: 1
+value: 52
+---
+-+- IPV6_HOPOPTS
+defined: 1
+value: 54
+---
+-+- IPV6_JOIN_GROUP
+defined: 1
+value: 20
+---
+-+- IPV6_LEAVE_GROUP
+defined: 1
+value: 21
+---
+-+- IPV6_MULTICAST_HOPS
+defined: 1
+value: 18
+---
+-+- IPV6_MULTICAST_IF
+defined: 1
+value: 17
+---
+-+- IPV6_MULTICAST_LOOP
+defined: 1
+value: 19
+---
+-+- IPV6_NEXTHOP
+defined: 1
+value: 9
+---
+-+- IPV6_PATHMTU
+defined: 0
+---
+-+- IPV6_PKTINFO
+defined: 1
+value: 50
+---
+-+- IPV6_RECVDSTOPTS
+defined: 1
+value: 58
+---
+-+- IPV6_RECVHOPLIMIT
+defined: 1
+value: 51
+---
+-+- IPV6_RECVHOPOPTS
+defined: 1
+value: 53
+---
+-+- IPV6_RECVPATHMTU
+defined: 0
+---
+-+- IPV6_RECVPKTINFO
+defined: 1
+value: 49
+---
+-+- IPV6_RECVRTHDR
+defined: 1
+value: 56
+---
+-+- IPV6_RECVTCLASS
+defined: 1
+value: 66
+---
+-+- IPV6_RTHDR
+defined: 1
+value: 57
+---
+-+- IPV6_RTHDRDSTOPTS
+defined: 1
+value: 55
+---
+-+- IPV6_RTHDR_TYPE_0
+defined: 1
+value: 0
+---
+-+- IPV6_TCLASS
+defined: 1
+value: 67
+---
+-+- IPV6_UNICAST_HOPS
+defined: 1
+value: 16
+---
+-+- IPV6_USE_MIN_MTU
+defined: 0
+---
+-+- IPV6_V6ONLY
+defined: 1
+value: 26
+---
+-+- IPX_TYPE
+defined: 0
+---
+-+- IP_ADD_MEMBERSHIP
+defined: 1
+value: 35
+---
+-+- IP_DEFAULT_MULTICAST_LOOP
+defined: 1
+value: 1
+---
+-+- IP_DEFAULT_MULTICAST_TTL
+defined: 1
+value: 1
+---
+-+- IP_DROP_MEMBERSHIP
+defined: 1
+value: 36
+---
+-+- IP_HDRINCL
+defined: 1
+value: 3
+---
+-+- IP_MAX_MEMBERSHIPS
+defined: 1
+value: 20
+---
+-+- IP_MULTICAST_IF
+defined: 1
+value: 32
+---
+-+- IP_MULTICAST_LOOP
+defined: 1
+value: 34
+---
+-+- IP_MULTICAST_TTL
+defined: 1
+value: 33
+---
+-+- IP_OPTIONS
+defined: 1
+value: 4
+---
+-+- IP_RECVDSTADDR
+defined: 0
+---
+-+- IP_RECVOPTS
+defined: 1
+value: 6
+---
+-+- IP_RECVRETOPTS
+defined: 1
+value: 7
+---
+-+- IP_RETOPTS
+defined: 1
+value: 7
+---
+-+- IP_TOS
+defined: 1
+value: 1
+---
+-+- IP_TTL
+defined: 1
+value: 2
+---
+-+- MSG_BTAG
+defined: 0
+---
+-+- MSG_CTRUNC
+defined: 1
+value: 8
+---
+-+- MSG_DONTROUTE
+defined: 1
+value: 4
+---
+-+- MSG_DONTWAIT
+defined: 1
+value: 64
+---
+-+- MSG_EOR
+defined: 1
+value: 128
+---
+-+- MSG_ETAG
+defined: 0
+---
+-+- MSG_OOB
+defined: 1
+value: 1
+---
+-+- MSG_PEEK
+defined: 1
+value: 2
+---
+-+- MSG_TRUNC
+defined: 1
+value: 32
+---
+-+- MSG_WAITALL
+defined: 1
+value: 256
+---
+-+- NETLINK_ARPD
+defined: 0
+---
+-+- NETLINK_DNRTMSG
+defined: 1
+value: 14
+---
+-+- NETLINK_FIREWALL
+defined: 1
+value: 3
+---
+-+- NETLINK_IP6_FW
+defined: 1
+value: 13
+---
+-+- NETLINK_NFLOG
+defined: 1
+value: 5
+---
+-+- NETLINK_ROUTE
+defined: 1
+value: 0
+---
+-+- NETLINK_ROUTE6
+defined: 0
+---
+-+- NETLINK_SKIP
+defined: 0
+---
+-+- NETLINK_TAPBASE
+defined: 0
+---
+-+- NETLINK_TCPDIAG
+defined: 0
+---
+-+- NETLINK_USERSOCK
+defined: 1
+value: 2
+---
+-+- NETLINK_W1
+defined: 0
+---
+-+- NETLINK_XFRM
+defined: 1
+value: 6
+---
+-+- NI_DGRAM
+defined: 1
+value: 16
+---
+-+- NI_MAXHOST
+defined: 1
+value: 1025
+---
+-+- NI_MAXSERV
+defined: 1
+value: 32
+---
+-+- NI_NAMEREQD
+defined: 1
+value: 8
+---
+-+- NI_NOFQDN
+defined: 1
+value: 4
+---
+-+- NI_NUMERICHOST
+defined: 1
+value: 1
+---
+-+- NI_NUMERICSERV
+defined: 1
+value: 2
+---
+-+- O_NONBLOCK
+defined: 1
+value: 2048
+---
+-+- PACKET_BROADCAST
+defined: 1
+value: 1
+---
+-+- PACKET_FASTROUTE
+defined: 1
+value: 6
+---
+-+- PACKET_HOST
+defined: 1
+value: 0
+---
+-+- PACKET_LOOPBACK
+defined: 1
+value: 5
+---
+-+- PACKET_MULTICAST
+defined: 1
+value: 2
+---
+-+- PACKET_OTHERHOST
+defined: 1
+value: 3
+---
+-+- PACKET_OUTGOING
+defined: 1
+value: 4
+---
+-+- POLLERR
+defined: 1
+value: 8
+---
+-+- POLLHUP
+defined: 1
+value: 16
+---
+-+- POLLIN
+defined: 1
+value: 1
+---
+-+- POLLMSG
+defined: 1
+value: 1024
+---
+-+- POLLNVAL
+defined: 1
+value: 32
+---
+-+- POLLOUT
+defined: 1
+value: 4
+---
+-+- POLLPRI
+defined: 1
+value: 2
+---
+-+- POLLRDBAND
+defined: 1
+value: 128
+---
+-+- POLLRDNORM
+defined: 1
+value: 64
+---
+-+- POLLWEBAND
+defined: 0
+---
+-+- POLLWRNORM
+defined: 1
+value: 256
+---
+-+- SHUT_RD
+defined: 1
+value: 0
+---
+-+- SHUT_RDWR
+defined: 1
+value: 2
+---
+-+- SHUT_WR
+defined: 1
+value: 1
+---
+-+- SIOCGIFNAME
+defined: 1
+value: 35088
+---
+-+- SIO_KEEPALIVE_VALS
+defined: 0
+---
+-+- SIO_RCVALL
+defined: 0
+---
+-+- SOCK_DGRAM
+defined: 1
+value: 2
+---
+-+- SOCK_RAW
+defined: 1
+value: 3
+---
+-+- SOCK_RDM
+defined: 1
+value: 4
+---
+-+- SOCK_SEQPACKET
+defined: 1
+value: 5
+---
+-+- SOCK_STREAM
+defined: 1
+value: 1
+---
+-+- SOL_ATALK
+defined: 0
+---
+-+- SOL_AX25
+defined: 0
+---
+-+- SOL_IP
+defined: 1
+value: 0
+---
+-+- SOL_IPX
+defined: 0
+---
+-+- SOL_NETROM
+defined: 0
+---
+-+- SOL_ROSE
+defined: 0
+---
+-+- SOL_SOCKET
+defined: 1
+value: 1
+---
+-+- SOL_TCP
+defined: 1
+value: 6
+---
+-+- SOL_UDP
+defined: 0
+---
+-+- SOMAXCONN
+defined: 1
+value: 128
+---
+-+- SO_ACCEPTCONN
+defined: 1
+value: 30
+---
+-+- SO_BROADCAST
+defined: 1
+value: 6
+---
+-+- SO_DEBUG
+defined: 1
+value: 1
+---
+-+- SO_DONTROUTE
+defined: 1
+value: 5
+---
+-+- SO_ERROR
+defined: 1
+value: 4
+---
+-+- SO_EXCLUSIVEADDRUSE
+defined: 0
+---
+-+- SO_KEEPALIVE
+defined: 1
+value: 9
+---
+-+- SO_LINGER
+defined: 1
+value: 13
+---
+-+- SO_OOBINLINE
+defined: 1
+value: 10
+---
+-+- SO_RCVBUF
+defined: 1
+value: 8
+---
+-+- SO_RCVLOWAT
+defined: 1
+value: 18
+---
+-+- SO_RCVTIMEO
+defined: 1
+value: 20
+---
+-+- SO_REUSEADDR
+defined: 1
+value: 2
+---
+-+- SO_REUSEPORT
+defined: 0
+---
+-+- SO_SNDBUF
+defined: 1
+value: 7
+---
+-+- SO_SNDLOWAT
+defined: 1
+value: 19
+---
+-+- SO_SNDTIMEO
+defined: 1
+value: 21
+---
+-+- SO_TYPE
+defined: 1
+value: 3
+---
+-+- SO_USELOOPBACK
+defined: 0
+---
+-+- TCP_CORK
+defined: 1
+value: 3
+---
+-+- TCP_DEFER_ACCEPT
+defined: 1
+value: 9
+---
+-+- TCP_INFO
+defined: 1
+value: 11
+---
+-+- TCP_KEEPCNT
+defined: 1
+value: 6
+---
+-+- TCP_KEEPIDLE
+defined: 1
+value: 4
+---
+-+- TCP_KEEPINTVL
+defined: 1
+value: 5
+---
+-+- TCP_LINGER2
+defined: 1
+value: 8
+---
+-+- TCP_MAXSEG
+defined: 1
+value: 2
+---
+-+- TCP_NODELAY
+defined: 1
+value: 1
+---
+-+- TCP_QUICKACK
+defined: 1
+value: 12
+---
+-+- TCP_SYNCNT
+defined: 1
+value: 7
+---
+-+- TCP_WINDOW_CLAMP
+defined: 1
+value: 10
+---
+-+- WIN32
+defined: 0
+---
+-+- WSAEAFNOSUPPORT
+defined: 0
+---
+-+- WSAEINPROGRESS
+defined: 0
+---
+-+- WSAEINTR
+defined: 0
+---
+-+- WSAEISCONN
+defined: 0
+---
+-+- WSAEWOULDBLOCK
+defined: 0
+---
+-+- WSA_INVALID_HANDLE
+defined: 0
+---
+-+- WSA_INVALID_PARAMETER
+defined: 0
+---
+-+- WSA_IO_INCOMPLETE
+defined: 0
+---
+-+- WSA_IO_PENDING
+defined: 0
+---
+-+- WSA_NOT_ENOUGH_MEMORY
+defined: 0
+---
+-+- WSA_OPERATION_ABORTED
+defined: 0
+---
+-+- WSA_WAIT_FAILED
+defined: 0
+---
+-+- WSA_WAIT_TIMEOUT
+defined: 0
+---
+-+- addrinfo
+align: 4
+size: 32
+fldofs ai_flags: 0
+fldsize ai_flags: 4
+fldunsigned ai_flags: 0
+fldofs ai_family: 4
+fldsize ai_family: 4
+fldunsigned ai_family: 0
+fldofs ai_socktype: 8
+fldsize ai_socktype: 4
+fldunsigned ai_socktype: 0
+fldofs ai_protocol: 12
+fldsize ai_protocol: 4
+fldunsigned ai_protocol: 0
+fldofs ai_addrlen: 16
+fldsize ai_addrlen: 4
+fldunsigned ai_addrlen: 1
+fldofs ai_addr: 20
+fldsize ai_addr: 4
+fldofs ai_canonname: 24
+fldsize ai_canonname: 4
+fldofs ai_next: 28
+fldsize ai_next: 4
+---
+-+- hostent
+align: 4
+size: 20
+fldofs h_name: 0
+fldsize h_name: 4
+fldofs h_aliases: 4
+fldsize h_aliases: 4
+fldofs h_addrtype: 8
+fldsize h_addrtype: 4
+fldunsigned h_addrtype: 0
+fldofs h_length: 12
+fldsize h_length: 4
+fldunsigned h_length: 0
+fldofs h_addr_list: 16
+fldsize h_addr_list: 4
+---
+-+- ifreq
+align: 4
+size: 32
+fldofs ifr_ifindex: 16
+fldsize ifr_ifindex: 4
+fldunsigned ifr_ifindex: 0
+fldofs ifr_name: 0
+fldsize ifr_name: 16
+---
+-+- in6_addr
+align: 4
+size: 16
+---
+-+- in_addr
+align: 4
+size: 4
+fldofs s_addr: 0
+fldsize s_addr: 4
+fldunsigned s_addr: 1
+---
+-+- linux
+defined: 1
+---
+-+- nfds_t
+size: 4
+unsigned: 1
+---
+-+- pollfd
+align: 4
+size: 8
+fldofs fd: 0
+fldsize fd: 4
+fldunsigned fd: 0
+fldofs events: 4
+fldsize events: 2
+fldunsigned events: 0
+fldofs revents: 6
+fldsize revents: 2
+fldunsigned revents: 0
+---
+-+- protoent
+align: 4
+size: 12
+fldofs p_proto: 8
+fldsize p_proto: 4
+fldunsigned p_proto: 0
+---
+-+- servent
+align: 4
+size: 16
+fldofs s_name: 0
+fldsize s_name: 4
+fldofs s_port: 8
+fldsize s_port: 4
+fldunsigned s_port: 0
+fldofs s_proto: 12
+fldsize s_proto: 4
+---
+-+- size_t
+size: 4
+unsigned: 1
+---
+-+- sockaddr
+align: 2
+size: 16
+fldofs sa_family: 0
+fldsize sa_family: 2
+fldunsigned sa_family: 1
+fldofs sa_data: 2
+fldsize sa_data: 14
+---
+-+- sockaddr_in
+align: 4
+size: 16
+fldofs sin_family: 0
+fldsize sin_family: 2
+fldunsigned sin_family: 1
+fldofs sin_port: 2
+fldsize sin_port: 2
+fldunsigned sin_port: 1
+fldofs sin_addr: 4
+fldsize sin_addr: 4
+---
+-+- sockaddr_in6
+align: 4
+size: 28
+fldofs sin6_family: 0
+fldsize sin6_family: 2
+fldunsigned sin6_family: 1
+fldofs sin6_port: 2
+fldsize sin6_port: 2
+fldunsigned sin6_port: 1
+fldofs sin6_flowinfo: 4
+fldsize sin6_flowinfo: 4
+fldunsigned sin6_flowinfo: 1
+fldofs sin6_addr: 8
+fldsize sin6_addr: 16
+fldofs sin6_scope_id: 24
+fldsize sin6_scope_id: 4
+fldunsigned sin6_scope_id: 1
+---
+-+- sockaddr_ll
+align: 4
+size: 20
+fldofs sll_ifindex: 4
+fldsize sll_ifindex: 4
+fldunsigned sll_ifindex: 0
+fldofs sll_protocol: 2
+fldsize sll_protocol: 2
+fldunsigned sll_protocol: 1
+fldofs sll_pkttype: 10
+fldsize sll_pkttype: 1
+fldunsigned sll_pkttype: 1
+fldofs sll_hatype: 8
+fldsize sll_hatype: 2
+fldunsigned sll_hatype: 1
+fldofs sll_addr: 12
+fldsize sll_addr: 8
+fldofs sll_halen: 11
+fldsize sll_halen: 1
+fldunsigned sll_halen: 1
+---
+-+- sockaddr_nl
+defined: 1
+align: 4
+size: 12
+fldofs nl_family: 0
+fldsize nl_family: 2
+fldunsigned nl_family: 1
+fldofs nl_pid: 4
+fldsize nl_pid: 4
+fldunsigned nl_pid: 1
+fldofs nl_groups: 8
+fldsize nl_groups: 4
+fldunsigned nl_groups: 1
+---
+-+- sockaddr_un
+defined: 1
+align: 2
+size: 110
+fldofs sun_family: 0
+fldsize sun_family: 2
+fldunsigned sun_family: 1
+fldofs sun_path: 2
+fldsize sun_path: 108
+---
+-+- socklen_t
+size: 4
+unsigned: 1
+---
+-+- ssize_t
+size: 4
+unsigned: 0
+---
+-+- timeval
+align: 4
+size: 8
+fldofs tv_sec: 0
+fldsize tv_sec: 4
+fldunsigned tv_sec: 0
+fldofs tv_usec: 4
+fldsize tv_usec: 4
+fldunsigned tv_usec: 0
+---
+-+- uint16_t
+size: 2
+unsigned: 1
+---
+-+- uint32_t
+size: 4
+unsigned: 1
+---

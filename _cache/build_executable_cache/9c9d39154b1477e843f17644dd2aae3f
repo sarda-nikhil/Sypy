@@ -1,0 +1,14 @@
+-+- UTSNAME
+align: 1
+size: 390
+fldofs sysname: 0
+fldsize sysname: 65
+fldofs nodename: 65
+fldsize nodename: 65
+fldofs release: 130
+fldsize release: 65
+fldofs version: 195
+fldsize version: 65
+fldofs machine: 260
+fldsize machine: 65
+---

@@ -1,0 +1,334 @@
+-+- ABDAY_1
+defined: 1
+value: 131072
+---
+-+- ABDAY_2
+defined: 1
+value: 131073
+---
+-+- ABDAY_3
+defined: 1
+value: 131074
+---
+-+- ABDAY_4
+defined: 1
+value: 131075
+---
+-+- ABDAY_5
+defined: 1
+value: 131076
+---
+-+- ABDAY_6
+defined: 1
+value: 131077
+---
+-+- ABDAY_7
+defined: 1
+value: 131078
+---
+-+- ABMON_1
+defined: 1
+value: 131086
+---
+-+- ABMON_10
+defined: 1
+value: 131095
+---
+-+- ABMON_11
+defined: 1
+value: 131096
+---
+-+- ABMON_12
+defined: 1
+value: 131097
+---
+-+- ABMON_2
+defined: 1
+value: 131087
+---
+-+- ABMON_3
+defined: 1
+value: 131088
+---
+-+- ABMON_4
+defined: 1
+value: 131089
+---
+-+- ABMON_5
+defined: 1
+value: 131090
+---
+-+- ABMON_6
+defined: 1
+value: 131091
+---
+-+- ABMON_7
+defined: 1
+value: 131092
+---
+-+- ABMON_8
+defined: 1
+value: 131093
+---
+-+- ABMON_9
+defined: 1
+value: 131094
+---
+-+- ALT_DIGITS
+defined: 1
+value: 131119
+---
+-+- AM_STR
+defined: 1
+value: 131110
+---
+-+- CHAR_MAX
+defined: 1
+value: 127
+---
+-+- CODESET
+defined: 1
+value: 14
+---
+-+- CRNCYSTR
+defined: 1
+value: 262159
+---
+-+- DAY_1
+defined: 1
+value: 131079
+---
+-+- DAY_2
+defined: 1
+value: 131080
+---
+-+- DAY_3
+defined: 1
+value: 131081
+---
+-+- DAY_4
+defined: 1
+value: 131082
+---
+-+- DAY_5
+defined: 1
+value: 131083
+---
+-+- DAY_6
+defined: 1
+value: 131084
+---
+-+- DAY_7
+defined: 1
+value: 131085
+---
+-+- D_FMT
+defined: 1
+value: 131113
+---
+-+- D_T_FMT
+defined: 1
+value: 131112
+---
+-+- ERA
+defined: 1
+value: 131116
+---
+-+- ERA_D_FMT
+defined: 1
+value: 131118
+---
+-+- ERA_D_T_FMT
+defined: 1
+value: 131120
+---
+-+- ERA_T_FMT
+defined: 1
+value: 131121
+---
+-+- LC_ADDRESS
+defined: 1
+value: 9
+---
+-+- LC_ALL
+defined: 1
+value: 6
+---
+-+- LC_COLLATE
+defined: 1
+value: 3
+---
+-+- LC_CTYPE
+defined: 1
+value: 0
+---
+-+- LC_IDENTIFICATION
+defined: 1
+value: 12
+---
+-+- LC_MAX
+defined: 0
+---
+-+- LC_MEASUREMENT
+defined: 1
+value: 11
+---
+-+- LC_MESSAGES
+defined: 1
+value: 5
+---
+-+- LC_MIN
+defined: 0
+---
+-+- LC_MONETARY
+defined: 1
+value: 4
+---
+-+- LC_NAME
+defined: 1
+value: 8
+---
+-+- LC_NUMERIC
+defined: 1
+value: 1
+---
+-+- LC_PAPER
+defined: 1
+value: 7
+---
+-+- LC_TELEPHONE
+defined: 1
+value: 10
+---
+-+- LC_TIME
+defined: 1
+value: 2
+---
+-+- MON_1
+defined: 1
+value: 131098
+---
+-+- MON_10
+defined: 1
+value: 131107
+---
+-+- MON_11
+defined: 1
+value: 131108
+---
+-+- MON_12
+defined: 1
+value: 131109
+---
+-+- MON_2
+defined: 1
+value: 131099
+---
+-+- MON_3
+defined: 1
+value: 131100
+---
+-+- MON_4
+defined: 1
+value: 131101
+---
+-+- MON_5
+defined: 1
+value: 131102
+---
+-+- MON_6
+defined: 1
+value: 131103
+---
+-+- MON_7
+defined: 1
+value: 131104
+---
+-+- MON_8
+defined: 1
+value: 131105
+---
+-+- MON_9
+defined: 1
+value: 131106
+---
+-+- NOEXPR
+defined: 1
+value: 327681
+---
+-+- PM_STR
+defined: 1
+value: 131111
+---
+-+- RADIXCHAR
+defined: 1
+value: 65536
+---
+-+- THOUSEP
+defined: 1
+value: 65537
+---
+-+- T_FMT
+defined: 1
+value: 131114
+---
+-+- T_FMT_AMPM
+defined: 1
+value: 131115
+---
+-+- YESEXPR
+defined: 1
+value: 327680
+---
+-+- _DATE_FMT
+defined: 1
+value: 131180
+---
+-+- lconv
+align: 4
+size: 56
+fldofs decimal_point: 0
+fldsize decimal_point: 4
+fldofs thousands_sep: 4
+fldsize thousands_sep: 4
+fldofs grouping: 8
+fldsize grouping: 4
+fldofs int_curr_symbol: 12
+fldsize int_curr_symbol: 4
+fldofs currency_symbol: 16
+fldsize currency_symbol: 4
+fldofs mon_decimal_point: 20
+fldsize mon_decimal_point: 4
+fldofs mon_thousands_sep: 24
+fldsize mon_thousands_sep: 4
+fldofs mon_grouping: 28
+fldsize mon_grouping: 4
+fldofs positive_sign: 32
+fldsize positive_sign: 4
+fldofs negative_sign: 36
+fldsize negative_sign: 4
+fldofs int_frac_digits: 40
+fldsize int_frac_digits: 1
+fldunsigned int_frac_digits: 0
+fldofs frac_digits: 41
+fldsize frac_digits: 1
+fldunsigned frac_digits: 0
+fldofs p_cs_precedes: 42
+fldsize p_cs_precedes: 1
+fldunsigned p_cs_precedes: 0
+fldofs p_sep_by_space: 43
+fldsize p_sep_by_space: 1
+fldunsigned p_sep_by_space: 0
+fldofs n_cs_precedes: 44
+fldsize n_cs_precedes: 1
+fldunsigned n_cs_precedes: 0
+fldofs n_sep_by_space: 45
+fldsize n_sep_by_space: 1
+fldunsigned n_sep_by_space: 0
+fldofs p_sign_posn: 46
+fldsize p_sign_posn: 1
+fldunsigned p_sign_posn: 0
+fldofs n_sign_posn: 47
+fldsize n_sign_posn: 1
+fldunsigned n_sign_posn: 0
+---

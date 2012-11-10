@@ -1,0 +1,16 @@
+-+- PyHeapTypeObject
+align: 4
+size: 436
+fldofs ht_type: 0
+fldsize ht_type: 196
+fldofs ht_name: 428
+fldsize ht_name: 4
+fldofs as_number: 196
+fldsize as_number: 156
+fldofs as_mapping: 352
+fldsize as_mapping: 12
+fldofs as_sequence: 364
+fldsize as_sequence: 40
+fldofs as_buffer: 404
+fldsize as_buffer: 24
+---

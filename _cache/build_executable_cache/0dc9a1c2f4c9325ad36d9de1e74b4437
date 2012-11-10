@@ -1,0 +1,116 @@
+-+- BUFSIZ
+value: 8192
+---
+-+- BZ_CONFIG_ERROR
+defined: 1
+value: -9
+---
+-+- BZ_DATA_ERROR
+defined: 1
+value: -4
+---
+-+- BZ_DATA_ERROR_MAGIC
+defined: 1
+value: -5
+---
+-+- BZ_FINISH
+defined: 1
+value: 2
+---
+-+- BZ_FINISH_OK
+defined: 1
+value: 3
+---
+-+- BZ_FLUSH
+defined: 1
+value: 1
+---
+-+- BZ_FLUSH_OK
+defined: 1
+value: 2
+---
+-+- BZ_IO_ERROR
+defined: 1
+value: -6
+---
+-+- BZ_MEM_ERROR
+defined: 1
+value: -3
+---
+-+- BZ_OK
+defined: 1
+value: 0
+---
+-+- BZ_OUTBUFF_FULL
+defined: 1
+value: -8
+---
+-+- BZ_PARAM_ERROR
+defined: 1
+value: -2
+---
+-+- BZ_RUN
+defined: 1
+value: 0
+---
+-+- BZ_RUN_OK
+defined: 1
+value: 1
+---
+-+- BZ_SEQUENCE_ERROR
+defined: 1
+value: -1
+---
+-+- BZ_STREAM_END
+defined: 1
+value: 4
+---
+-+- BZ_UNEXPECTED_EOF
+defined: 1
+value: -7
+---
+-+- SEEK_SET
+value: 0
+---
+-+- bz_stream
+align: 4
+size: 48
+fldofs next_in: 0
+fldsize next_in: 4
+fldofs avail_in: 4
+fldsize avail_in: 4
+fldunsigned avail_in: 1
+fldofs total_in_lo32: 8
+fldsize total_in_lo32: 4
+fldunsigned total_in_lo32: 1
+fldofs total_in_hi32: 12
+fldsize total_in_hi32: 4
+fldunsigned total_in_hi32: 1
+fldofs next_out: 16
+fldsize next_out: 4
+fldofs avail_out: 20
+fldsize avail_out: 4
+fldunsigned avail_out: 1
+fldofs total_out_lo32: 24
+fldsize total_out_lo32: 4
+fldunsigned total_out_lo32: 1
+fldofs total_out_hi32: 28
+fldsize total_out_hi32: 4
+fldunsigned total_out_hi32: 1
+fldofs state: 32
+fldsize state: 4
+fldofs bzalloc: 36
+fldsize bzalloc: 4
+fldofs bzfree: 40
+fldsize bzfree: 4
+fldofs opaque: 44
+fldsize opaque: 4
+---
+-+- off_t
+size: 8
+unsigned: 0
+---
+-+- size_t
+size: 4
+unsigned: 1
+---

@@ -1,0 +1,30 @@
+-+- ITIMER_PROF
+defined: 1
+value: 2
+---
+-+- ITIMER_REAL
+defined: 1
+value: 0
+---
+-+- ITIMER_VIRTUAL
+defined: 1
+value: 1
+---
+-+- itimerval
+align: 4
+size: 16
+fldofs it_value: 8
+fldsize it_value: 8
+fldofs it_interval: 0
+fldsize it_interval: 8
+---
+-+- timeval
+align: 4
+size: 8
+fldofs tv_sec: 0
+fldsize tv_sec: 4
+fldunsigned tv_sec: 0
+fldofs tv_usec: 4
+fldsize tv_usec: 4
+fldunsigned tv_usec: 0
+---

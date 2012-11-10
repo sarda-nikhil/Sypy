@@ -1,0 +1,10 @@
+-+- TIMEVAL
+align: 4
+size: 8
+fldofs tv_sec: 0
+fldsize tv_sec: 4
+fldunsigned tv_sec: 0
+fldofs tv_usec: 4
+fldsize tv_usec: 4
+fldunsigned tv_usec: 0
+---

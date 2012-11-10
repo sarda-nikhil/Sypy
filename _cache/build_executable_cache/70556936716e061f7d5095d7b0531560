@@ -1,0 +1,29 @@
+-+- EINTR
+defined: 1
+value: 4
+---
+-+- GETTIMEOFDAY_NO_TZ
+defined: 0
+---
+-+- RUSAGE
+align: 4
+size: 72
+fldofs ru_utime: 0
+fldsize ru_utime: 8
+fldofs ru_stime: 8
+fldsize ru_stime: 8
+---
+-+- RUSAGE_SELF
+defined: 1
+value: 0
+---
+-+- TIMEVAL
+align: 4
+size: 8
+fldofs tv_sec: 0
+fldsize tv_sec: 4
+fldunsigned tv_sec: 0
+fldofs tv_usec: 4
+fldsize tv_usec: 4
+fldunsigned tv_usec: 0
+---

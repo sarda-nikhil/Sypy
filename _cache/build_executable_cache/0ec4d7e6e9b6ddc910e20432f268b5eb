@@ -1,0 +1,34 @@
+-+- STAT_STRUCT
+align: 4
+size: 96
+fldofs st_mode: 16
+fldsize st_mode: 4
+fldunsigned st_mode: 1
+fldofs st_ino: 88
+fldsize st_ino: 8
+fldunsigned st_ino: 1
+fldofs st_dev: 0
+fldsize st_dev: 8
+fldunsigned st_dev: 1
+fldofs st_nlink: 20
+fldsize st_nlink: 4
+fldunsigned st_nlink: 1
+fldofs st_uid: 24
+fldsize st_uid: 4
+fldunsigned st_uid: 1
+fldofs st_gid: 28
+fldsize st_gid: 4
+fldunsigned st_gid: 1
+fldofs st_size: 44
+fldsize st_size: 8
+fldunsigned st_size: 0
+fldofs st_atim: 64
+fldsize st_atim: 8
+fldofs st_mtim: 72
+fldsize st_mtim: 8
+fldofs st_ctim: 80
+fldsize st_ctim: 8
+fldofs st_blksize: 52
+fldsize st_blksize: 4
+fldunsigned st_blksize: 0
+---

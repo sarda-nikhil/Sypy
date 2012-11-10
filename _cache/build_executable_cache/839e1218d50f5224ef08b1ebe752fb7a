@@ -1,0 +1,51 @@
+-+- MAP_ANON
+defined: 1
+value: 32
+---
+-+- MAP_ANONYMOUS
+defined: 1
+value: 32
+---
+-+- MAP_DENYWRITE
+defined: 1
+value: 2048
+---
+-+- MAP_EXECUTABLE
+defined: 1
+value: 4096
+---
+-+- MAP_NORESERVE
+defined: 1
+value: 16384
+---
+-+- MAP_PRIVATE
+value: 2
+---
+-+- MAP_SHARED
+value: 1
+---
+-+- MREMAP_MAYMOVE
+defined: 1
+value: 1
+---
+-+- MS_SYNC
+value: 4
+---
+-+- PROT_EXEC
+defined: 1
+value: 4
+---
+-+- PROT_READ
+value: 1
+---
+-+- PROT_WRITE
+value: 2
+---
+-+- off_t
+size: 8
+unsigned: 0
+---
+-+- size_t
+size: 4
+unsigned: 1
+---

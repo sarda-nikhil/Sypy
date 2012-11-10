@@ -1,0 +1,84 @@
+-+- _Bool
+align: 1
+size: 2
+fldofs field: 1
+fldsize field: 1
+---
+-+- char_star
+align: 4
+size: 8
+fldofs field: 4
+fldsize field: 4
+---
+-+- double
+align: 4
+size: 12
+fldofs field: 4
+fldsize field: 8
+---
+-+- float
+align: 4
+size: 8
+fldofs field: 4
+fldsize field: 4
+---
+-+- signed_char
+align: 1
+size: 2
+fldofs field: 1
+fldsize field: 1
+---
+-+- signed_int
+align: 4
+size: 8
+fldofs field: 4
+fldsize field: 4
+---
+-+- signed_long
+align: 4
+size: 8
+fldofs field: 4
+fldsize field: 4
+---
+-+- signed_long_long
+align: 4
+size: 12
+fldofs field: 4
+fldsize field: 8
+---
+-+- signed_short
+align: 2
+size: 4
+fldofs field: 2
+fldsize field: 2
+---
+-+- unsigned_char
+align: 1
+size: 2
+fldofs field: 1
+fldsize field: 1
+---
+-+- unsigned_int
+align: 4
+size: 8
+fldofs field: 4
+fldsize field: 4
+---
+-+- unsigned_long
+align: 4
+size: 8
+fldofs field: 4
+fldsize field: 4
+---
+-+- unsigned_long_long
+align: 4
+size: 12
+fldofs field: 4
+fldsize field: 8
+---
+-+- unsigned_short
+align: 2
+size: 4
+fldofs field: 2
+fldsize field: 2
+---

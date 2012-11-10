@@ -1,0 +1,6 @@
+-+- DIRENT
+align: 4
+size: 276
+fldofs d_name: 19
+fldsize d_name: 256
+---

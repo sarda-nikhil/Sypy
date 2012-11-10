@@ -1,0 +1,210 @@
+-+- FFI_BAD_TYPEDEF
+value: 1
+---
+-+- FFI_DEFAULT_ABI
+value: 1
+---
+-+- FFI_OK
+value: 0
+---
+-+- FFI_TYPE_STRUCT
+value: 13
+---
+-+- ffi_abi
+size: 4
+unsigned: 1
+---
+-+- ffi_closure
+align: 8
+size: 24
+---
+-+- ffi_type
+align: 4
+size: 12
+fldofs size: 0
+fldsize size: 4
+fldunsigned size: 1
+fldofs alignment: 4
+fldsize alignment: 2
+fldunsigned alignment: 1
+fldofs type: 6
+fldsize type: 2
+fldunsigned type: 1
+fldofs elements: 8
+fldsize elements: 4
+---
+-+- ffi_type_double_alignment
+value: 4
+---
+-+- ffi_type_double_size
+value: 8
+---
+-+- ffi_type_double_type
+value: 3
+---
+-+- ffi_type_float_alignment
+value: 4
+---
+-+- ffi_type_float_size
+value: 4
+---
+-+- ffi_type_float_type
+value: 2
+---
+-+- ffi_type_longdouble_alignment
+value: 4
+---
+-+- ffi_type_longdouble_size
+value: 12
+---
+-+- ffi_type_longdouble_type
+value: 4
+---
+-+- ffi_type_pointer_alignment
+value: 4
+---
+-+- ffi_type_pointer_size
+value: 4
+---
+-+- ffi_type_pointer_type
+value: 14
+---
+-+- ffi_type_schar_alignment
+value: 1
+---
+-+- ffi_type_schar_size
+value: 1
+---
+-+- ffi_type_schar_type
+value: 6
+---
+-+- ffi_type_sint16_alignment
+value: 2
+---
+-+- ffi_type_sint16_size
+value: 2
+---
+-+- ffi_type_sint16_type
+value: 8
+---
+-+- ffi_type_sint32_alignment
+value: 4
+---
+-+- ffi_type_sint32_size
+value: 4
+---
+-+- ffi_type_sint32_type
+value: 10
+---
+-+- ffi_type_sint64_alignment
+value: 4
+---
+-+- ffi_type_sint64_size
+value: 8
+---
+-+- ffi_type_sint64_type
+value: 12
+---
+-+- ffi_type_sint8_alignment
+value: 1
+---
+-+- ffi_type_sint8_size
+value: 1
+---
+-+- ffi_type_sint8_type
+value: 6
+---
+-+- ffi_type_sint_alignment
+value: 4
+---
+-+- ffi_type_sint_size
+value: 4
+---
+-+- ffi_type_sint_type
+value: 10
+---
+-+- ffi_type_sshort_alignment
+value: 2
+---
+-+- ffi_type_sshort_size
+value: 2
+---
+-+- ffi_type_sshort_type
+value: 8
+---
+-+- ffi_type_uchar_alignment
+value: 1
+---
+-+- ffi_type_uchar_size
+value: 1
+---
+-+- ffi_type_uchar_type
+value: 5
+---
+-+- ffi_type_uint16_alignment
+value: 2
+---
+-+- ffi_type_uint16_size
+value: 2
+---
+-+- ffi_type_uint16_type
+value: 7
+---
+-+- ffi_type_uint32_alignment
+value: 4
+---
+-+- ffi_type_uint32_size
+value: 4
+---
+-+- ffi_type_uint32_type
+value: 9
+---
+-+- ffi_type_uint64_alignment
+value: 4
+---
+-+- ffi_type_uint64_size
+value: 8
+---
+-+- ffi_type_uint64_type
+value: 11
+---
+-+- ffi_type_uint8_alignment
+value: 1
+---
+-+- ffi_type_uint8_size
+value: 1
+---
+-+- ffi_type_uint8_type
+value: 5
+---
+-+- ffi_type_uint_alignment
+value: 4
+---
+-+- ffi_type_uint_size
+value: 4
+---
+-+- ffi_type_uint_type
+value: 9
+---
+-+- ffi_type_ushort_alignment
+value: 2
+---
+-+- ffi_type_ushort_size
+value: 2
+---
+-+- ffi_type_ushort_type
+value: 7
+---
+-+- ffi_type_void_alignment
+value: 1
+---
+-+- ffi_type_void_size
+value: 1
+---
+-+- ffi_type_void_type
+value: 0
+---
+-+- size_t
+size: 4
+unsigned: 1
+---

@@ -1,0 +1,144 @@
+-+- CRYPTO_LOCK
+value: 1
+---
+-+- EVP_MD_CTX_SIZE
+size: 24
+---
+-+- EVP_MD_SIZE
+size: 76
+---
+-+- EVP_MD_st
+align: 4
+size: 76
+fldofs md_size: 8
+fldsize md_size: 4
+fldunsigned md_size: 0
+fldofs block_size: 64
+fldsize block_size: 4
+fldunsigned block_size: 0
+---
+-+- GENERAL_NAME_st
+align: 4
+size: 8
+fldofs type: 0
+fldsize type: 4
+fldunsigned type: 0
+---
+-+- GEN_DIRNAME
+value: 4
+---
+-+- NID_subject_alt_name
+value: 85
+---
+-+- OPENSSL_EXPORT_VAR_AS_FUNCTION
+defined: 0
+---
+-+- OPENSSL_NO_SSL2
+defined: 1
+---
+-+- OPENSSL_VERSION_NUMBER
+value: 268439567
+---
+-+- SSLEAY_VERSION
+defined: 1
+value_0: 79
+value_1: 112
+value_2: 101
+value_3: 110
+value_4: 83
+value_5: 83
+value_6: 76
+value_7: 32
+value_8: 49
+value_9: 46
+value_10: 48
+value_11: 46
+value_12: 49
+value_13: 32
+value_14: 49
+value_15: 52
+value_16: 32
+value_17: 77
+value_18: 97
+value_19: 114
+value_20: 32
+value_21: 50
+value_22: 48
+value_23: 49
+value_24: 50
+---
+-+- SSL_ERROR_SSL
+value: 1
+---
+-+- SSL_ERROR_SYSCALL
+value: 5
+---
+-+- SSL_ERROR_WANT_CONNECT
+value: 7
+---
+-+- SSL_ERROR_WANT_READ
+value: 2
+---
+-+- SSL_ERROR_WANT_WRITE
+value: 3
+---
+-+- SSL_ERROR_WANT_X509_LOOKUP
+value: 4
+---
+-+- SSL_ERROR_ZERO_RETURN
+value: 6
+---
+-+- SSL_FILETYPE_PEM
+value: 1
+---
+-+- SSL_MODE_AUTO_RETRY
+value: 4
+---
+-+- SSL_OP_ALL
+value: 2147486719
+---
+-+- SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS
+value: 2048
+---
+-+- SSL_RECEIVED_SHUTDOWN
+value: 2
+---
+-+- SSL_VERIFY_FAIL_IF_NO_PEER_CERT
+value: 2
+---
+-+- SSL_VERIFY_NONE
+value: 0
+---
+-+- SSL_VERIFY_PEER
+value: 1
+---
+-+- X509_extension_st
+align: 4
+size: 12
+fldofs value: 8
+fldsize value: 4
+---
+-+- X509_name_entry_st
+align: 4
+size: 16
+fldofs set: 8
+fldsize set: 4
+fldunsigned set: 0
+---
+-+- asn1_string_st
+align: 4
+size: 16
+fldofs length: 0
+fldsize length: 4
+fldunsigned length: 0
+fldofs data: 8
+fldsize data: 4
+---
+-+- v3_ext_method
+align: 4
+size: 56
+fldofs it: 8
+fldsize it: 4
+fldofs d2i: 20
+fldsize d2i: 4
+---

@@ -1,0 +1,46 @@
+-+- CLOCK_T
+size: 4
+unsigned: 0
+---
+-+- GID_T
+size: 4
+unsigned: 1
+---
+-+- SEEK_CUR
+defined: 1
+value: 1
+---
+-+- SEEK_END
+defined: 1
+value: 2
+---
+-+- SEEK_SET
+defined: 1
+value: 0
+---
+-+- TMS
+align: 4
+size: 16
+fldofs tms_utime: 0
+fldsize tms_utime: 4
+fldunsigned tms_utime: 0
+fldofs tms_stime: 4
+fldsize tms_stime: 4
+fldunsigned tms_stime: 0
+fldofs tms_cutime: 8
+fldsize tms_cutime: 4
+fldunsigned tms_cutime: 0
+fldofs tms_cstime: 12
+fldsize tms_cstime: 4
+fldunsigned tms_cstime: 0
+---
+-+- UTIMBUF
+align: 4
+size: 8
+fldofs actime: 0
+fldsize actime: 4
+fldunsigned actime: 0
+fldofs modtime: 4
+fldsize modtime: 4
+fldunsigned modtime: 0
+---

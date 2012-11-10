@@ -1,0 +1,10 @@
+-+- TIMEB
+align: 4
+size: 12
+fldofs time: 0
+fldsize time: 4
+fldunsigned time: 0
+fldofs millitm: 4
+fldsize millitm: 2
+fldunsigned millitm: 1
+---

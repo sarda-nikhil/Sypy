@@ -1,0 +1,73 @@
+-+- EPOLLERR
+defined: 1
+value: 8
+---
+-+- EPOLLET
+defined: 1
+value: 2147483648
+---
+-+- EPOLLHUP
+defined: 1
+value: 16
+---
+-+- EPOLLIN
+defined: 1
+value: 1
+---
+-+- EPOLLMSG
+defined: 1
+value: 1024
+---
+-+- EPOLLONESHOT
+defined: 1
+value: 1073741824
+---
+-+- EPOLLOUT
+defined: 1
+value: 4
+---
+-+- EPOLLPRI
+defined: 1
+value: 2
+---
+-+- EPOLLRDBAND
+defined: 1
+value: 128
+---
+-+- EPOLLRDNORM
+defined: 1
+value: 64
+---
+-+- EPOLLWRBAND
+defined: 1
+value: 512
+---
+-+- EPOLLWRNORM
+defined: 1
+value: 256
+---
+-+- EPOLL_CTL_ADD
+value: 1
+---
+-+- EPOLL_CTL_DEL
+value: 2
+---
+-+- EPOLL_CTL_MOD
+value: 3
+---
+-+- epoll_data
+align: 4
+size: 8
+fldofs fd: 0
+fldsize fd: 4
+fldunsigned fd: 0
+---
+-+- epoll_event
+align: 4
+size: 12
+fldofs events: 0
+fldsize events: 4
+fldunsigned events: 1
+fldofs data: 4
+fldsize data: 8
+---

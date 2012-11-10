@@ -1,0 +1,12 @@
+-+- RTLD_GLOBAL
+defined: 1
+value: 256
+---
+-+- RTLD_LOCAL
+defined: 1
+value: 0
+---
+-+- RTLD_NOW
+defined: 1
+value: 2
+---

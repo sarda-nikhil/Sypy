@@ -1,0 +1,82 @@
+-+- Bytef
+size: 1
+unsigned: 1
+---
+-+- MAX_MEM_LEVEL
+value: 9
+---
+-+- MAX_WBITS
+value: 15
+---
+-+- ZLIB_VERSION
+defined: 1
+value_0: 49
+value_1: 46
+value_2: 50
+value_3: 46
+value_4: 51
+value_5: 46
+value_6: 52
+---
+-+- Z_BEST_COMPRESSION
+value: 9
+---
+-+- Z_BEST_SPEED
+value: 1
+---
+-+- Z_BUF_ERROR
+value: -5
+---
+-+- Z_DATA_ERROR
+value: -3
+---
+-+- Z_DEFAULT_COMPRESSION
+value: -1
+---
+-+- Z_DEFAULT_STRATEGY
+value: 0
+---
+-+- Z_DEFLATED
+value: 8
+---
+-+- Z_FILTERED
+value: 1
+---
+-+- Z_FINISH
+value: 4
+---
+-+- Z_FULL_FLUSH
+value: 3
+---
+-+- Z_HUFFMAN_ONLY
+value: 2
+---
+-+- Z_MEM_ERROR
+value: -4
+---
+-+- Z_NO_FLUSH
+value: 0
+---
+-+- Z_OK
+value: 0
+---
+-+- Z_STREAM_END
+value: 1
+---
+-+- Z_STREAM_ERROR
+value: -2
+---
+-+- Z_SYNC_FLUSH
+value: 2
+---
+-+- uInt
+size: 4
+unsigned: 1
+---
+-+- uLong
+size: 4
+unsigned: 1
+---
+-+- voidpf
+size: 4
+---

@@ -1,0 +1,259 @@
+-+- DN_ACCESS
+defined: 1
+value: 1
+---
+-+- DN_ATTRIB
+defined: 1
+value: 32
+---
+-+- DN_CREATE
+defined: 1
+value: 4
+---
+-+- DN_DELETE
+defined: 1
+value: 8
+---
+-+- DN_MODIFY
+defined: 1
+value: 2
+---
+-+- DN_MULTISHOT
+defined: 1
+value: 2147483648
+---
+-+- DN_RENAME
+defined: 1
+value: 16
+---
+-+- FD_CLOEXEC
+defined: 1
+value: 1
+---
+-+- F_DUPFD
+defined: 1
+value: 0
+---
+-+- F_EXLCK
+defined: 1
+value: 4
+---
+-+- F_GETFD
+defined: 1
+value: 1
+---
+-+- F_GETFL
+defined: 1
+value: 3
+---
+-+- F_GETLEASE
+defined: 1
+value: 1025
+---
+-+- F_GETLK
+defined: 1
+value: 12
+---
+-+- F_GETLK64
+defined: 1
+value: 12
+---
+-+- F_GETOWN
+defined: 1
+value: 9
+---
+-+- F_GETSIG
+defined: 1
+value: 11
+---
+-+- F_NOTIFY
+defined: 1
+value: 1026
+---
+-+- F_RDLCK
+defined: 1
+value: 0
+---
+-+- F_SETFD
+defined: 1
+value: 2
+---
+-+- F_SETFL
+defined: 1
+value: 4
+---
+-+- F_SETLEASE
+defined: 1
+value: 1024
+---
+-+- F_SETLK
+defined: 1
+value: 13
+---
+-+- F_SETLK64
+defined: 1
+value: 13
+---
+-+- F_SETLKW
+defined: 1
+value: 14
+---
+-+- F_SETLKW64
+defined: 1
+value: 14
+---
+-+- F_SETOWN
+defined: 1
+value: 8
+---
+-+- F_SETSIG
+defined: 1
+value: 10
+---
+-+- F_SHLCK
+defined: 1
+value: 8
+---
+-+- F_UNLCK
+defined: 1
+value: 2
+---
+-+- F_WRLCK
+defined: 1
+value: 1
+---
+-+- I_ATMARK
+defined: 0
+---
+-+- I_CANPUT
+defined: 0
+---
+-+- I_CKBAND
+defined: 0
+---
+-+- I_FDINSERT
+defined: 0
+---
+-+- I_FIND
+defined: 0
+---
+-+- I_FLUSH
+defined: 0
+---
+-+- I_FLUSHBAND
+defined: 0
+---
+-+- I_GETBAND
+defined: 0
+---
+-+- I_GETCLTIME
+defined: 0
+---
+-+- I_GETSIG
+defined: 0
+---
+-+- I_GRDOPT
+defined: 0
+---
+-+- I_LINK
+defined: 0
+---
+-+- I_LIST
+defined: 0
+---
+-+- I_LOOK
+defined: 0
+---
+-+- I_NREAD
+defined: 0
+---
+-+- I_PEEK
+defined: 0
+---
+-+- I_PLINK
+defined: 0
+---
+-+- I_POP
+defined: 0
+---
+-+- I_PUNLINK
+defined: 0
+---
+-+- I_PUSH
+defined: 0
+---
+-+- I_RECVFD
+defined: 0
+---
+-+- I_SENDFD
+defined: 0
+---
+-+- I_SETCLTIME
+defined: 0
+---
+-+- I_SETSIG
+defined: 0
+---
+-+- I_SRDOPT
+defined: 0
+---
+-+- I_STR
+defined: 0
+---
+-+- I_SWROPT
+defined: 0
+---
+-+- I_UNLINK
+defined: 0
+---
+-+- LOCK_EX
+defined: 1
+value: 2
+---
+-+- LOCK_MAND
+defined: 1
+value: 32
+---
+-+- LOCK_NB
+defined: 1
+value: 4
+---
+-+- LOCK_READ
+defined: 1
+value: 64
+---
+-+- LOCK_RW
+defined: 1
+value: 192
+---
+-+- LOCK_SH
+defined: 1
+value: 1
+---
+-+- LOCK_UN
+defined: 1
+value: 8
+---
+-+- LOCK_WRITE
+defined: 1
+value: 128
+---
+-+- flock
+align: 4
+size: 24
+fldofs l_start: 4
+fldsize l_start: 8
+fldunsigned l_start: 0
+fldofs l_len: 12
+fldsize l_len: 8
+fldunsigned l_len: 0
+fldofs l_pid: 20
+fldsize l_pid: 4
+fldunsigned l_pid: 0
+fldofs l_type: 0
+fldsize l_type: 2
+fldunsigned l_type: 0
+fldofs l_whence: 2
+fldsize l_whence: 2
+fldunsigned l_whence: 0
+---

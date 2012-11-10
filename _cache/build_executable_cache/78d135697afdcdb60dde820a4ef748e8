@@ -1,0 +1,197 @@
+-+- XML_CQUANT_NONE
+value: 0
+---
+-+- XML_CQUANT_OPT
+value: 1
+---
+-+- XML_CQUANT_PLUS
+value: 3
+---
+-+- XML_CQUANT_REP
+value: 2
+---
+-+- XML_CTYPE_ANY
+value: 2
+---
+-+- XML_CTYPE_CHOICE
+value: 5
+---
+-+- XML_CTYPE_EMPTY
+value: 1
+---
+-+- XML_CTYPE_MIXED
+value: 3
+---
+-+- XML_CTYPE_NAME
+value: 4
+---
+-+- XML_CTYPE_SEQ
+value: 6
+---
+-+- XML_Content
+align: 4
+size: 20
+fldofs numchildren: 12
+fldsize numchildren: 4
+fldunsigned numchildren: 1
+fldofs children: 16
+fldsize children: 4
+fldofs name: 8
+fldsize name: 4
+fldofs type: 0
+fldsize type: 4
+fldunsigned type: 1
+fldofs quant: 4
+fldsize quant: 4
+fldunsigned quant: 1
+---
+-+- XML_ERROR_ABORTED
+value: 35
+---
+-+- XML_ERROR_ASYNC_ENTITY
+value: 13
+---
+-+- XML_ERROR_ATTRIBUTE_EXTERNAL_ENTITY_REF
+value: 16
+---
+-+- XML_ERROR_BAD_CHAR_REF
+value: 14
+---
+-+- XML_ERROR_BINARY_ENTITY_REF
+value: 15
+---
+-+- XML_ERROR_CANT_CHANGE_FEATURE_ONCE_PARSING
+value: 26
+---
+-+- XML_ERROR_DUPLICATE_ATTRIBUTE
+value: 8
+---
+-+- XML_ERROR_ENTITY_DECLARED_IN_PE
+value: 24
+---
+-+- XML_ERROR_EXTERNAL_ENTITY_HANDLING
+value: 21
+---
+-+- XML_ERROR_FEATURE_REQUIRES_XML_DTD
+value: 25
+---
+-+- XML_ERROR_FINISHED
+value: 36
+---
+-+- XML_ERROR_INCOMPLETE_PE
+value: 29
+---
+-+- XML_ERROR_INCORRECT_ENCODING
+value: 19
+---
+-+- XML_ERROR_INVALID_TOKEN
+value: 4
+---
+-+- XML_ERROR_JUNK_AFTER_DOC_ELEMENT
+value: 9
+---
+-+- XML_ERROR_MISPLACED_XML_PI
+value: 17
+---
+-+- XML_ERROR_NOT_STANDALONE
+value: 22
+---
+-+- XML_ERROR_NOT_SUSPENDED
+value: 34
+---
+-+- XML_ERROR_NO_ELEMENTS
+value: 3
+---
+-+- XML_ERROR_NO_MEMORY
+value: 1
+---
+-+- XML_ERROR_PARAM_ENTITY_REF
+value: 10
+---
+-+- XML_ERROR_PARTIAL_CHAR
+value: 6
+---
+-+- XML_ERROR_PUBLICID
+value: 32
+---
+-+- XML_ERROR_RECURSIVE_ENTITY_REF
+value: 12
+---
+-+- XML_ERROR_SUSPENDED
+value: 33
+---
+-+- XML_ERROR_SUSPEND_PE
+value: 37
+---
+-+- XML_ERROR_SYNTAX
+value: 2
+---
+-+- XML_ERROR_TAG_MISMATCH
+value: 7
+---
+-+- XML_ERROR_TEXT_DECL
+value: 31
+---
+-+- XML_ERROR_UNBOUND_PREFIX
+value: 27
+---
+-+- XML_ERROR_UNCLOSED_CDATA_SECTION
+value: 20
+---
+-+- XML_ERROR_UNCLOSED_TOKEN
+value: 5
+---
+-+- XML_ERROR_UNDECLARING_PREFIX
+value: 28
+---
+-+- XML_ERROR_UNDEFINED_ENTITY
+value: 11
+---
+-+- XML_ERROR_UNEXPECTED_STATE
+value: 23
+---
+-+- XML_ERROR_UNKNOWN_ENCODING
+value: 18
+---
+-+- XML_ERROR_XML_DECL
+value: 30
+---
+-+- XML_Encoding
+align: 4
+size: 1036
+fldofs map: 0
+fldsize map: 1024
+fldofs data: 1024
+fldsize data: 4
+fldofs convert: 1028
+fldsize convert: 4
+fldofs release: 1032
+fldsize release: 4
+---
+-+- XML_FALSE
+value: 0
+---
+-+- XML_MAJOR_VERSION
+value: 2
+---
+-+- XML_MICRO_VERSION
+value: 1
+---
+-+- XML_MINOR_VERSION
+value: 0
+---
+-+- XML_PARAM_ENTITY_PARSING_ALWAYS
+value: 2
+---
+-+- XML_PARAM_ENTITY_PARSING_NEVER
+value: 0
+---
+-+- XML_PARAM_ENTITY_PARSING_UNLESS_STANDALONE
+value: 1
+---
+-+- XML_Parser_SIZE
+size: 4
+---
+-+- XML_TRUE
+value: 1
+---
