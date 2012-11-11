@@ -20,6 +20,9 @@ class Constraint(object):
     def set_connective(self, conn):
         self.__connective = conn
 
+    def __str__(self):
+        return "%s %s %s" self.__lvalue, self.__op, self.__rvalue
+
 class ConstraintStack(object):
     def __init__(self):
         self.items = []
@@ -43,3 +46,7 @@ class ConstraintStack(object):
         return retval
 
     def set_conn_on_tos(self, conn):
+        top = self.pop()
+        top.__connective = conn
+        self.push(top)
+

@@ -2,7 +2,8 @@
 """
 
 from pypy.tool.pairtype import extendabletype
-from pypy.interpreter import eval, baseobjspace, pycode, ConstraintStack
+from pypy.interpreter import eval, baseobjspace, pycode
+from pypy.interpreter.constraintstack import ConstraintStack
 from pypy.interpreter.argument import Arguments
 from pypy.interpreter.error import OperationError, operationerrfmt
 from pypy.interpreter.executioncontext import ExecutionContext
