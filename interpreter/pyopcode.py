@@ -807,7 +807,7 @@ class __extend__(pyframe.PyFrame):
         w_2 = self.popvalue()
         w_1_s = self.popvalue_s()
         
-        if testnum == 0: #"cmp_lt"
+        if testnum == 0:
             cmp_op_s = "<"
         elif testnum == 1:
             cmp_op_s = "<="
@@ -822,10 +822,11 @@ class __extend__(pyframe.PyFrame):
         else:
             cmp_op_s = ""
         
-        w_constraint = str(w_1_s) + cmp_op_s + str(w_2_s)
+        w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
 
         # Put the constraint in a constraint stack
         print w_constraint
+        self.constraint_stack.push(w_constraint)
 
         w_1 = self.popvalue()
         w_result = None

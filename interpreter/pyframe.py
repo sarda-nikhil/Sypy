@@ -2,7 +2,7 @@
 """
 
 from pypy.tool.pairtype import extendabletype
-from pypy.interpreter import eval, baseobjspace, pycode
+from pypy.interpreter import eval, baseobjspace, pycode, ConstraintStack
 from pypy.interpreter.argument import Arguments
 from pypy.interpreter.error import OperationError, operationerrfmt
 from pypy.interpreter.executioncontext import ExecutionContext
@@ -55,6 +55,7 @@ class PyFrame(eval.Frame):
     locals_stack_w_s = None
     w_globals_s = None
     w_locals_s = None
+    constraint_stack = ConstraintStack()
 
     def __init__(self, space, code, w_globals, outer_func):
         if not we_are_translated():

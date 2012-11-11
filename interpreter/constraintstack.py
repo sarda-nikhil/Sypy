@@ -28,7 +28,10 @@ class ConstraintStack(object):
         return self.items.pop()
 
     def push(self, constraint):
-        self.items.push(constraint)
+        self.items.append(constraint)
+
+    def peek(self):
+        return self.items[len(self.items)]
 
     def get_constr(self):
         retval = ""
@@ -38,3 +41,5 @@ class ConstraintStack(object):
             if constr.__connective is not None:
                 retval += constr.__connective
         return retval
+
+    def set_conn_on_tos(self, conn):
