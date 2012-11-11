@@ -74,6 +74,9 @@ class __extend__(pyframe.PyFrame):
     opdescmap = bytecode_spec.opdescmap
     HAVE_ARGUMENT = bytecode_spec.HAVE_ARGUMENT
 
+    # symbolic execution trackers
+    conditional_fall_through = False
+
     ### opcode dispatch ###
 
     def dispatch(self, pycode, next_instr, ec):
@@ -827,7 +830,9 @@ class __extend__(pyframe.PyFrame):
         w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
 
         try:
-            print "Symbolic: " + str(w_1.is_symbolic())
+            print w_1.is_symbolic()
+            if w_1.is_symbolic() or w_2.is_symbolic():
+                self.conditional_fall_through = True
         except:
             None
         # Put the constraint in a constraint stack
@@ -910,18 +915,26 @@ class __extend__(pyframe.PyFrame):
         # determined from jump targets. If targets for constraints
         # are identical, they are connected via /\, else it is \/
         self.target_tracker_s = target
+
+        print "Falling through? " + str(self.conditional_fall_through)
         
         w_value = self.popvalue()
-        if not self.space.is_true(w_value):
+        if not self.space.is_true(w_value) and \
+                not self.conditional_fall_through:
             return target
+        conditional_fall_through = False
         return next_instr
 
     def POP_JUMP_IF_TRUE(self, target, next_instr):
         self.target_tracker_s = target
         
+        print "Falling through? " + str(self.conditional_fall_through)
+
         w_value = self.popvalue()
-        if self.space.is_true(w_value):
+        if self.space.is_true(w_value) and \
+                not self.conditional_fall_through:
             return target
+        conditional_fall_through = False
         return next_instr
 
     def JUMP_IF_FALSE_OR_POP(self, target, next_instr):

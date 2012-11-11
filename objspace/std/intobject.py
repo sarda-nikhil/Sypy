@@ -69,7 +69,10 @@ class W_IntObject(W_AbstractIntObject):
         return "%s " % (str(w_self.intval))
 
     def is_symbolic(w_self):
-        return w_self.__is_symbolic
+        # Int values are non symbolic, should be a cleaner way #HACK
+        if isinstance(w_self.__is_symbolic, W_IntObject):
+            return False
+        return w_self.__is_symbolic.boolval
 
     def set_symbolic(w_self, s):
         w_self.__is_symbolic = s
