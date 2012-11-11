@@ -807,7 +807,8 @@ class __extend__(pyframe.PyFrame):
         w_2_s = self.popvalue_s()
         w_2 = self.popvalue()
         w_1_s = self.popvalue_s()
-        
+        w_1 = self.popvalue()
+
         if testnum == 0:
             cmp_op_s = "<"
         elif testnum == 1:
@@ -822,18 +823,17 @@ class __extend__(pyframe.PyFrame):
             cmp_op_s = ">="
         else:
             cmp_op_s = ""
-        try :
-            print "Object %s" % (str(w_1_s))
-        except:
-            None
 
         w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
 
+        try:
+            print "Symbolic: " + str(w_1.is_symbolic())
+        except:
+            None
         # Put the constraint in a constraint stack
         print w_constraint
         self.constraint_stack.push(w_constraint)
 
-        w_1 = self.popvalue()
         w_result = None
         for i, attr in unrolling_compare_dispatch_table:
             if i == testnum:

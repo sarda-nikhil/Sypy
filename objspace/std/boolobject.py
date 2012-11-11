@@ -32,6 +32,8 @@ class W_BoolObject(W_Object):
     def bigint_w(w_self, space):
         return rbigint.fromint(int(w_self.boolval))
 
+    def __str__(w_self):
+        return str(w_self.boolval)
 
 registerimplementation(W_BoolObject)
 
