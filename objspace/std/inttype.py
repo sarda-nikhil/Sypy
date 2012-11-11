@@ -34,14 +34,14 @@ def descr_bit_length(space, w_int):
     return space.wrap(bits)
 
 
-def wrapint(space, x):
+def wrapint(space, x, w_symbolic=False):
     if space.config.objspace.std.withsmallint:
         from pypy.objspace.std.smallintobject import W_SmallIntObject
         try:
             return W_SmallIntObject(x)
         except OverflowError:
             from pypy.objspace.std.intobject import W_IntObject
-            return W_IntObject(x)
+            return W_IntObject(x, w_symbolic)
     elif space.config.objspace.std.withprebuiltint:
         from pypy.objspace.std.intobject import W_IntObject
         lower = space.config.objspace.std.prebuiltintfrom
@@ -62,7 +62,7 @@ def wrapint(space, x):
         return w_res
     else:
         from pypy.objspace.std.intobject import W_IntObject
-        return W_IntObject(x)
+        return W_IntObject(x, w_symbolic)
 
 # ____________________________________________________________
 
@@ -88,7 +88,7 @@ def retry_to_w_long(space, parser, base=0):
     from pypy.objspace.std.longobject import newlong
     return newlong(space, bigint)
 
-def descr__new__(space, w_inttype, w_x=0, w_base=gateway.NoneNotWrapped):
+def descr__new__(space, w_inttype, w_x=0, w_symbolic=False, w_base=gateway.NoneNotWrapped):
     from pypy.objspace.std.intobject import W_IntObject
     w_longval = None
     w_value = w_x     # 'x' is the keyword argument name in CPython
@@ -169,10 +169,10 @@ def descr__new__(space, w_inttype, w_x=0, w_base=gateway.NoneNotWrapped):
         return w_longval
     elif space.is_w(w_inttype, space.w_int):
         # common case
-        return wrapint(space, value)
+        return wrapint(space, value, w_symbolic)
     else:
         w_obj = space.allocate_instance(W_IntObject, w_inttype)
-        W_IntObject.__init__(w_obj, value)
+        W_IntObject.__init__(w_obj, value, w_symbolic)
         return w_obj
 
 def descr_get_numerator(space, w_obj):

@@ -21,7 +21,7 @@ class Constraint(object):
         self.__connective = conn
 
     def __str__(self):
-        return "%s %s %s" self.__lvalue, self.__op, self.__rvalue
+        return "%s %s %s" % (self.__lvalue, self.__op, self.__rvalue)
 
 class ConstraintStack(object):
     def __init__(self):

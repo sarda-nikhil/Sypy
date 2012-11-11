@@ -822,7 +822,11 @@ class __extend__(pyframe.PyFrame):
             cmp_op_s = ">="
         else:
             cmp_op_s = ""
-        
+        try :
+            print "Object %s" % (str(w_1_s))
+        except:
+            None
+
         w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
 
         # Put the constraint in a constraint stack
@@ -838,11 +842,6 @@ class __extend__(pyframe.PyFrame):
         else:
             raise BytecodeCorruption, "bad COMPARE_OP oparg"
         self.pushvalue(w_result)
-        #print w_2
-        #print w_1
-        #print self.pycode.co_names_w
-        #print self.pycode.co_varnames
-        
         
     def IMPORT_NAME(self, nameindex, next_instr):
         space = self.space
