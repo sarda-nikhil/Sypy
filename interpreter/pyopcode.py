@@ -904,6 +904,11 @@ class __extend__(pyframe.PyFrame):
         return next_instr
 
     def POP_JUMP_IF_FALSE(self, target, next_instr):
+        # Since binary connectives are lost, they need to be
+        # determined from jump targets. If targets for constraints
+        # are identical, they are connected via /\, else it is \/
+        self.target_tracker_s = target
+        
         w_value = self.popvalue()
         if not self.space.is_true(w_value):
             return target
