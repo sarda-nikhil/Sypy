@@ -915,12 +915,16 @@ class __extend__(pyframe.PyFrame):
         return next_instr
 
     def POP_JUMP_IF_TRUE(self, target, next_instr):
+        self.target_tracker_s = target
+        
         w_value = self.popvalue()
         if self.space.is_true(w_value):
             return target
         return next_instr
 
     def JUMP_IF_FALSE_OR_POP(self, target, next_instr):
+        self.target_tracker_s = target
+        
         w_value = self.peekvalue()
         if not self.space.is_true(w_value):
             return target
@@ -928,6 +932,8 @@ class __extend__(pyframe.PyFrame):
         return next_instr
 
     def JUMP_IF_TRUE_OR_POP(self, target, next_instr):
+        self.target_tracker_s = target
+        
         w_value = self.peekvalue()
         if self.space.is_true(w_value):
             return target
