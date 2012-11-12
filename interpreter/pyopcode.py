@@ -77,6 +77,7 @@ class __extend__(pyframe.PyFrame):
     # symbolic execution trackers
     conditional_fall_through = False
     fork_insns = []
+    visited_insns = []
 
     ### opcode dispatch ###
 
@@ -84,6 +85,7 @@ class __extend__(pyframe.PyFrame):
         # For the sequel, force 'next_instr' to be unsigned for performance
         next_instr = r_uint(next_instr)
         co_code = pycode.co_code
+        self.visited_insns = []
 
         try:
             while True:
@@ -220,12 +222,12 @@ class __extend__(pyframe.PyFrame):
                     # If this is the end of the road, backtrack to the
                     # last fork point
                     if len(self.fork_insns) > 0:
-                        print "Forked insns is non empty"
-                        print self.fork_insns
                         s_fork_path = self.fork_insns.pop()
-                        print "Returned: " + str(self.popvalue())
-                        print "Jumping to insn: " + str(s_fork_path)
+                        print "Symbolic Execution Returned: " + \
+                            str(self.popvalue())
                         return s_fork_path
+                    # Clear the visited insns
+                    self.visited_insns = []
                     raise Return
                 else:
                     unroller = SReturnValue(w_returnvalue)
@@ -240,6 +242,7 @@ class __extend__(pyframe.PyFrame):
                     if block is None:
                         w_result = unroller.nomoreblocks()
                         self.pushvalue(w_result)
+                        self.visited_insns = []
                         raise Return
                     else:
                         next_instr = block.handle(self, unroller)
@@ -932,13 +935,18 @@ class __extend__(pyframe.PyFrame):
 
         w_value = self.popvalue()
         if not self.space.is_true(w_value):
-                if not self.conditional_fall_through:
-                    return target
-                else:
-                    print "We are falling through " + str(target) + " " + str(next_instr)
+                if self.conditional_fall_through:
                     self.conditional_fall_through = False
-                    self.fork_insns.append(target)
-
+                    if next_instr not in self.visited_insns:
+                        self.fork_insns.append(next_instr)
+                        self.visited_insns.append(next_instr)
+                return target
+        
+        if self.conditional_fall_through:
+            self.conditional_fall_through = False
+            if target not in self.visited_insns:
+                self.fork_insns.append(target)
+                self.visited_insns.append(target)
         return next_instr
 
     def POP_JUMP_IF_TRUE(self, target, next_instr):
@@ -946,12 +954,18 @@ class __extend__(pyframe.PyFrame):
         
         w_value = self.popvalue()
         if self.space.is_true(w_value):
-                if not self.conditional_fall_through:
-                    return target
-                else:
+                if self.conditional_fall_through:
                     self.conditional_fall_through = False
-                    self.fork_insns.append(target)
-
+                    if next_instr not in self.visited_insns:
+                        self.fork_insns.append(next_instr)
+                        self.visited_insns.append(next_instr)
+                return target
+        
+        if self.conditional_fall_through:
+            self.conditional_fall_through = False
+            if target not in self.visited_insns:
+                self.fork_insns.append(target)
+                self.visited_insns.append(target)
         return next_instr
 
     def JUMP_IF_FALSE_OR_POP(self, target, next_instr):
