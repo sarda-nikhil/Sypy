@@ -11,6 +11,7 @@ class Constraint(object):
     __lvalue = None
     __op = None
     __connective = None
+    __negated = False
 
     def __init__(self, l, r, op):
         self.__rvalue = r
@@ -21,7 +22,25 @@ class Constraint(object):
         self.__connective = conn
 
     def __str__(self):
-        return "%s %s %s" % (self.__lvalue, self.__op, self.__rvalue)
+        s = self.__lvalue + " " + self.__op + " " + self.__rvalue
+        if self.__negated:
+            s = "not " + s
+        return s
+
+    def lvalue(self):
+        return self.__lvalue
+
+    def rvalue(self):
+        return self.__rvalue
+
+    def op(self):
+        return self.__op
+
+    def conn(self):
+        return self.__connective
+
+    def negate(self):
+        self.__negated = not self.__negated
 
 class ConstraintStack(object):
     def __init__(self):
@@ -39,10 +58,10 @@ class ConstraintStack(object):
     def get_constr(self):
         retval = ""
         for constr in self.items:
-            retval += constr.__lvalue + \
-                constr.__op + constr.__rvalue
-            if constr.__connective is not None:
-                retval += constr.__connective
+            retval += constr.lvalue() + \
+                constr.op() + constr.rvalue()
+            if constr.conn() is not None:
+                retval += constr.conn()
         return retval
 
     def set_conn_on_tos(self, conn):

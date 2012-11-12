@@ -225,6 +225,8 @@ class __extend__(pyframe.PyFrame):
                         s_fork_path = self.fork_insns.pop()
                         print "Symbolic Execution Returned: " + \
                             str(self.popvalue())
+                        print "Constraints are: " + \
+                            self.constraint_stack.get_constr()
                         return s_fork_path
                     # Clear the visited insns
                     self.visited_insns = []
@@ -846,7 +848,7 @@ class __extend__(pyframe.PyFrame):
         else:
             cmp_op_s = ""
 
-        w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
+        self.w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
 
         try:
             if w_1.is_symbolic() or w_2.is_symbolic():
@@ -854,8 +856,7 @@ class __extend__(pyframe.PyFrame):
         except:
             None
         # Put the constraint in a constraint stack
-        self.constraint_stack.push(w_constraint)
-
+        
         w_result = None
         for i, attr in unrolling_compare_dispatch_table:
             if i == testnum:
@@ -937,6 +938,7 @@ class __extend__(pyframe.PyFrame):
         if not self.space.is_true(w_value):
                 if self.conditional_fall_through:
                     self.conditional_fall_through = False
+                    self.constraint_stack.push(w_constraint)
                     if next_instr not in self.visited_insns:
                         self.fork_insns.append(next_instr)
                         self.visited_insns.append(next_instr)
