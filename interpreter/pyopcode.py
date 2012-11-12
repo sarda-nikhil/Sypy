@@ -938,7 +938,8 @@ class __extend__(pyframe.PyFrame):
         if not self.space.is_true(w_value):
                 if self.conditional_fall_through:
                     self.conditional_fall_through = False
-                    self.constraint_stack.push(w_constraint)
+                    self.w_constraint.negate()
+                    self.constraint_stack.push(self.w_constraint)
                     if next_instr not in self.visited_insns:
                         self.fork_insns.append(next_instr)
                         self.visited_insns.append(next_instr)
@@ -946,6 +947,7 @@ class __extend__(pyframe.PyFrame):
         
         if self.conditional_fall_through:
             self.conditional_fall_through = False
+            self.constraint_stack.push(self.w_constraint)        
             if target not in self.visited_insns:
                 self.fork_insns.append(target)
                 self.visited_insns.append(target)
@@ -958,6 +960,7 @@ class __extend__(pyframe.PyFrame):
         if self.space.is_true(w_value):
                 if self.conditional_fall_through:
                     self.conditional_fall_through = False
+                    self.constraint_stack.push(self.w_constraint)
                     if next_instr not in self.visited_insns:
                         self.fork_insns.append(next_instr)
                         self.visited_insns.append(next_instr)
@@ -965,6 +968,8 @@ class __extend__(pyframe.PyFrame):
         
         if self.conditional_fall_through:
             self.conditional_fall_through = False
+            self.w_constraint.negate()
+            self.constraint_stack.push(self.w_constraint)        
             if target not in self.visited_insns:
                 self.fork_insns.append(target)
                 self.visited_insns.append(target)

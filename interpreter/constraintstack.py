@@ -58,8 +58,7 @@ class ConstraintStack(object):
     def get_constr(self):
         retval = ""
         for constr in self.items:
-            retval += constr.lvalue() + \
-                constr.op() + constr.rvalue()
+            retval += str(constr) + " "
             if constr.conn() is not None:
                 retval += constr.conn()
         return retval
