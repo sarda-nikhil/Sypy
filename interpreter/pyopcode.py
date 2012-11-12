@@ -76,6 +76,7 @@ class __extend__(pyframe.PyFrame):
 
     # symbolic execution trackers
     conditional_fall_through = False
+    fork_insns = []
 
     ### opcode dispatch ###
 
@@ -177,7 +178,13 @@ class __extend__(pyframe.PyFrame):
             if not jit.we_are_jitted():
                 ec.bytecode_trace(self)
                 next_instr = r_uint(self.last_instr)
-            opcode = ord(co_code[next_instr])
+            try:
+                opcode = ord(co_code[next_instr])
+            except:
+                print "Exception caught at: " + str(next_instr)
+                print len(co_code)
+                exit(0)
+
             next_instr += 1
             if space.config.objspace.logbytecodes:
                 space.bytecodecounts[opcode] += 1
@@ -210,6 +217,15 @@ class __extend__(pyframe.PyFrame):
                 block = self.unrollstack(SReturnValue.kind)
                 if block is None:
                     self.pushvalue(w_returnvalue)   # XXX ping pong
+                    # If this is the end of the road, backtrack to the
+                    # last fork point
+                    if len(self.fork_insns) > 0:
+                        print "Forked insns is non empty"
+                        print self.fork_insns
+                        s_fork_path = self.fork_insns.pop()
+                        print "Returned: " + str(self.popvalue())
+                        print "Jumping to insn: " + str(s_fork_path)
+                        return s_fork_path
                     raise Return
                 else:
                     unroller = SReturnValue(w_returnvalue)
@@ -830,13 +846,11 @@ class __extend__(pyframe.PyFrame):
         w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
 
         try:
-            print w_1.is_symbolic()
             if w_1.is_symbolic() or w_2.is_symbolic():
                 self.conditional_fall_through = True
         except:
             None
         # Put the constraint in a constraint stack
-        print w_constraint
         self.constraint_stack.push(w_constraint)
 
         w_result = None
@@ -916,25 +930,28 @@ class __extend__(pyframe.PyFrame):
         # are identical, they are connected via /\, else it is \/
         self.target_tracker_s = target
 
-        print "Falling through? " + str(self.conditional_fall_through)
-        
         w_value = self.popvalue()
-        if not self.space.is_true(w_value) and \
-                not self.conditional_fall_through:
-            return target
-        conditional_fall_through = False
+        if not self.space.is_true(w_value):
+                if not self.conditional_fall_through:
+                    return target
+                else:
+                    print "We are falling through " + str(target) + " " + str(next_instr)
+                    self.conditional_fall_through = False
+                    self.fork_insns.append(target)
+
         return next_instr
 
     def POP_JUMP_IF_TRUE(self, target, next_instr):
         self.target_tracker_s = target
         
-        print "Falling through? " + str(self.conditional_fall_through)
-
         w_value = self.popvalue()
-        if self.space.is_true(w_value) and \
-                not self.conditional_fall_through:
-            return target
-        conditional_fall_through = False
+        if self.space.is_true(w_value):
+                if not self.conditional_fall_through:
+                    return target
+                else:
+                    self.conditional_fall_through = False
+                    self.fork_insns.append(target)
+
         return next_instr
 
     def JUMP_IF_FALSE_OR_POP(self, target, next_instr):

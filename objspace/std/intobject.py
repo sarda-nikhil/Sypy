@@ -72,6 +72,8 @@ class W_IntObject(W_AbstractIntObject):
         # Int values are non symbolic, should be a cleaner way #HACK
         if isinstance(w_self.__is_symbolic, W_IntObject):
             return False
+        elif isinstance(w_self.__is_symbolic, bool):
+            return w_self.__is_symbolic
         return w_self.__is_symbolic.boolval
 
     def set_symbolic(w_self, s):
