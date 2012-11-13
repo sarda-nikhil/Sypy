@@ -86,6 +86,7 @@ class __extend__(pyframe.PyFrame):
         next_instr = r_uint(next_instr)
         co_code = pycode.co_code
         self.visited_insns = []
+        self.constraint_stack.clear()
 
         try:
             while True:

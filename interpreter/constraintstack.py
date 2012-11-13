@@ -68,3 +68,5 @@ class ConstraintStack(object):
         top.__connective = conn
         self.push(top)
 
+    def clear(self):
+        self.items = []
