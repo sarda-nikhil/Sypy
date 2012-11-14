@@ -2,12 +2,14 @@ from pypy.interpreter import gateway
 from pypy.objspace.std.stdtypedef import StdTypeDef
 from pypy.objspace.std.inttype import int_typedef
 
-def descr__new__(space, w_booltype, w_obj=None):
+def descr__new__(space, w_booltype, w_obj=None, w_symbolic=False):
     space.w_bool.check_user_subclass(w_booltype)
     if space.is_true(w_obj):
-        return space.w_True
+        res = space.w_True        
     else:
-        return space.w_False
+        res = space.w_False
+    res.set_symbolic(w_symbolic)
+    return res
 
 # ____________________________________________________________
 
