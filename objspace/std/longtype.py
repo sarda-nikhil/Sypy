@@ -8,7 +8,7 @@ def descr_conjugate(space, w_int):
     return space.long(w_int)
 
 
-def descr__new__(space, w_longtype, w_x=0, w_base=gateway.NoneNotWrapped):
+def descr__new__(space, w_longtype, w_x=0, w_symbolic=False, w_base=gateway.NoneNotWrapped):
     from pypy.objspace.std.longobject import W_LongObject
     from pypy.rlib.rbigint import rbigint
     if space.config.objspace.std.withsmalllong:
@@ -23,16 +23,16 @@ def descr__new__(space, w_longtype, w_x=0, w_base=gateway.NoneNotWrapped):
             and space.is_w(w_longtype, space.w_long)):
             return w_value
         elif type(w_value) is W_LongObject:
-            return newbigint(space, w_longtype, w_value.num)
+            return newbigint(space, w_longtype, w_value.num, w_symbolic)
         elif space.isinstance_w(w_value, space.w_str):
-            return string_to_w_long(space, w_longtype, space.str_w(w_value))
+            return string_to_w_long(space, w_longtype, space.str_w(w_value), w_symbolic)
         elif space.isinstance_w(w_value, space.w_unicode):
             if space.config.objspace.std.withropeunicode:
                 from pypy.objspace.std.ropeunicodeobject import unicode_to_decimal_w
             else:
                 from pypy.objspace.std.unicodeobject import unicode_to_decimal_w
             return string_to_w_long(space, w_longtype,
-                                    unicode_to_decimal_w(space, w_value))
+                                    unicode_to_decimal_w(space, w_value), w_symbolic)
         else:
             # otherwise, use the __long__() or the __trunc__ methods
             w_obj = w_value
@@ -47,7 +47,7 @@ def descr__new__(space, w_longtype, w_x=0, w_base=gateway.NoneNotWrapped):
                 else:
                     w_obj = space.int(w_obj)
             bigint = space.bigint_w(w_obj)
-            return newbigint(space, w_longtype, bigint)
+            return newbigint(space, w_longtype, bigint, w_symbolic)
     else:
         base = space.int_w(w_base)
 
@@ -64,19 +64,19 @@ def descr__new__(space, w_longtype, w_x=0, w_base=gateway.NoneNotWrapped):
                 raise OperationError(space.w_TypeError,
                                      space.wrap("long() can't convert non-string "
                                                 "with explicit base"))
-        return string_to_w_long(space, w_longtype, s, base)
+        return string_to_w_long(space, w_longtype, s, base, w_symbolic)
 
 
-def string_to_w_long(space, w_longtype, s, base=10):
+def string_to_w_long(space, w_longtype, s, base=10, w_symbolic=False):
     try:
         bigint = string_to_bigint(s, base)
     except ParseStringError, e:
         raise OperationError(space.w_ValueError,
                              space.wrap(e.msg))
-    return newbigint(space, w_longtype, bigint)
+    return newbigint(space, w_longtype, bigint, w_symbolic)
 string_to_w_long._dont_inline_ = True
 
-def newbigint(space, w_longtype, bigint):
+def newbigint(space, w_longtype, bigint, w_symbolic=False):
     """Turn the bigint into a W_LongObject.  If withsmalllong is enabled,
     check if the bigint would fit in a smalllong, and return a
     W_SmallLongObject instead if it does.  Similar to newlong() in
@@ -93,7 +93,7 @@ def newbigint(space, w_longtype, bigint):
             return W_SmallLongObject(z)
     from pypy.objspace.std.longobject import W_LongObject
     w_obj = space.allocate_instance(W_LongObject, w_longtype)
-    W_LongObject.__init__(w_obj, bigint)
+    W_LongObject.__init__(w_obj, bigint, w_symbolic)
     return w_obj
 
 def descr_get_numerator(space, w_obj):

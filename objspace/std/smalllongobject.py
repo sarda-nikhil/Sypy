@@ -19,11 +19,12 @@ LONGLONG_MIN = r_longlong((-1) << (LONGLONG_BIT-1))
 
 class W_SmallLongObject(W_AbstractLongObject):
     from pypy.objspace.std.longtype import long_typedef as typedef
-    _immutable_fields_ = ['longlong']
+    _immutable_fields_ = ['longlong', '__is_symbolic']
 
-    def __init__(w_self, value):
+    def __init__(w_self, value, w_symbolic=False):
         assert isinstance(value, r_longlong)
         w_self.longlong = value
+        w_self.__is_symbolic = w_symbolic
 
     @staticmethod
     def fromint(value):
@@ -62,6 +63,18 @@ class W_SmallLongObject(W_AbstractLongObject):
 
     def bigint_w(w_self, space):
         return w_self.asbigint()
+
+    def is_symbolic(w_self):
+        # Int values are non symbolic, should be a cleaner way #HACK
+        if isinstance(w_self.__is_symbolic, W_SmallLongObject):
+            return False
+        elif isinstance(w_self.__is_symbolic, bool):
+            return w_self.__is_symbolic
+        return w_self.__is_symbolic.boolval
+
+    def set_symbolic(w_self, s):
+        w_self.__is_symbolic = s
+
 
 registerimplementation(W_SmallLongObject)
 

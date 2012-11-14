@@ -30,10 +30,11 @@ class W_AbstractLongObject(W_Object):
 class W_LongObject(W_AbstractLongObject):
     """This is a wrapper of rbigint."""
     from pypy.objspace.std.longtype import long_typedef as typedef
-    _immutable_fields_ = ['num']
+    _immutable_fields_ = ['num', '__is_symbolic']
 
-    def __init__(w_self, l):
+    def __init__(w_self, l, w_symbolic=False):
         w_self.num = l # instance of rbigint
+        w_self.__is_symbolic = w_symbolic
 
     def fromint(space, intval):
         return W_LongObject(rbigint.fromint(intval))
@@ -87,9 +88,18 @@ class W_LongObject(W_AbstractLongObject):
     def __repr__(self):
         return '<W_LongObject(%d)>' % self.num.tolong()
 
+    def is_symbolic(self):
+        if isinstance(self.__is_symbolic, bool):
+            return self.__is_symbolic
+        return self.__is_symbolic.boolval
+
+    def set_symbolic(w_self, s):
+        w_self.__is_symbolic = s
+
+
 registerimplementation(W_LongObject)
 
-def newlong(space, bigint):
+def newlong(space, bigint, w_symbolic=False):
     """Turn the bigint into a W_LongObject.  If withsmalllong is enabled,
     check if the bigint would fit in a smalllong, and return a
     W_SmallLongObject instead if it does.
@@ -101,8 +111,8 @@ def newlong(space, bigint):
             pass
         else:
             from pypy.objspace.std.smalllongobject import W_SmallLongObject
-            return W_SmallLongObject(z)
-    return W_LongObject(bigint)
+            return W_SmallLongObject(z, w_symbolic)
+    return W_LongObject(bigint, w_symbolic)
 
 
 # bool-to-long
@@ -144,10 +154,12 @@ def float__Long(space, w_longobj):
                              space.wrap("long int too large to convert to float"))
 
 def repr__Long(space, w_long):
-    return space.wrap(w_long.num.repr())
+    return str__Long(space, w_long)
 
 def str__Long(space, w_long):
-    return space.wrap(w_long.num.str())
+    a = w_long.num.str()
+    res = a + " Symbolic: " + str(w_long.is_symbolic())
+    return space.wrap(res)
 
 def format__Long_ANY(space, w_long, w_format_spec):
     return newformat.run_formatter(space, w_format_spec, "format_int_or_long",
