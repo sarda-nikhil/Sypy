@@ -33,6 +33,9 @@ class Constraint(object):
     def rvalue(self):
         return self.__rvalue
 
+    def augment_lvalue(self, s):
+        self.__lvalue = s + " " + self.__lvalue
+
     def op(self):
         return self.__op
 
@@ -42,18 +45,28 @@ class Constraint(object):
     def negate(self):
         self.__negated = not self.__negated
 
+    def is_negated(self):
+        return self.__negated
+
 class ConstraintStack(object):
     def __init__(self):
         self.items = []
 
     def pop(self):
-        return self.items.pop()
+        if len(self.items) == 0:
+            return None
+        if self.peek().is_negated():
+            return self.items.pop()
+        else:
+            top = self.items.pop()
+            top.negate()
+            self.push(top)
 
     def push(self, constraint):
         self.items.append(constraint)
 
     def peek(self):
-        return self.items[len(self.items)]
+        return self.items[len(self.items) - 1]
 
     def get_constr(self):
         retval = ""
@@ -70,3 +83,9 @@ class ConstraintStack(object):
 
     def clear(self):
         self.items = []
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)

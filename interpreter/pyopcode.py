@@ -224,11 +224,19 @@ class __extend__(pyframe.PyFrame):
                     # last fork point
                     if len(self.fork_insns) > 0:
                         s_fork_path = self.fork_insns.pop()
+                        if not self.constraint_stack.is_empty():
+                            print "Constraints are: " + \
+                                self.constraint_stack.get_constr()
+                            self.constraint_stack.pop()
                         print "Symbolic Execution Returned: " + \
                             str(self.popvalue())
-                        print "Constraints are: " + \
-                            self.constraint_stack.get_constr()
                         return s_fork_path
+                    else:
+                        if not self.constraint_stack.size() == 0:
+                            print "Constraints are: " + \
+                                self.constraint_stack.get_constr()
+                            self.constraint_stack.pop()
+
                     # Clear the visited insns
                     self.visited_insns = []
                     raise Return
@@ -939,7 +947,7 @@ class __extend__(pyframe.PyFrame):
         if not self.space.is_true(w_value):
                 if self.conditional_fall_through:
                     self.conditional_fall_through = False
-                    self.w_constraint.negate()
+                    self.w_constraint.augment_lvalue("not")
                     self.constraint_stack.push(self.w_constraint)
                     if next_instr not in self.visited_insns:
                         self.fork_insns.append(next_instr)
@@ -969,7 +977,6 @@ class __extend__(pyframe.PyFrame):
         
         if self.conditional_fall_through:
             self.conditional_fall_through = False
-            self.w_constraint.negate()
             self.constraint_stack.push(self.w_constraint)        
             if target not in self.visited_insns:
                 self.fork_insns.append(target)
