@@ -854,6 +854,10 @@ class __extend__(pyframe.PyFrame):
             cmp_op_s = ">"
         elif testnum == 5:
             cmp_op_s = ">="
+        elif testnum == 8:
+            cmp_op_s = "is"
+        elif testnum == 9:
+            cmp_op_s = "is_not"
         else:
             cmp_op_s = ""
 
