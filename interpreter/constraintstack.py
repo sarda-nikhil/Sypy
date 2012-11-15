@@ -34,7 +34,8 @@ class Constraint(object):
         return self.__rvalue
 
     def augment_lvalue(self, s):
-        self.__lvalue = s + " " + self.__lvalue
+        return Constraint("not " + self.lvalue(), \
+                              self.rvalue(), self.op())
 
     def op(self):
         return self.__op
@@ -49,31 +50,44 @@ class Constraint(object):
         return self.__negated
 
 class ConstraintStack(object):
+    """
+    The constraint stack helps keep track of all the constraints that
+    need to be satisfied in order to jump to a target location.
+
+    The constraint stack looks like [([constr1, constr2], insn), ...]
+    """
     def __init__(self):
         self.items = []
 
-    def pop(self):
+    def pop(self, insn):
         if len(self.items) == 0:
             return None
-        if self.peek().is_negated():
-            return self.items.pop()
-        else:
-            top = self.items.pop()
-            top.negate()
-            self.push(top)
+        for constr_list, instr in self.items:
+            if instr == insn:
+                constr_list = []
+                return
 
-    def push(self, constraint):
-        self.items.append(constraint)
+    def push(self, constraint, insn):
+        for constr_list, instr in self.items:
+            if instr == insn:
+                constr_list.append(constraint)
+                return
+        self.items.append(([constraint], insn))
 
     def peek(self):
+        if len(self.items) < 1:
+            return (None, 0)
         return self.items[len(self.items) - 1]
 
-    def get_constr(self):
+    def get_constr(self, insn):
         retval = ""
-        for constr in self.items:
-            retval += str(constr) + " "
-            if constr.conn() is not None:
-                retval += constr.conn()
+        for constr_list, instr in self.items:
+            if instr > insn:
+                break;
+            if len(constr_list) == 0:
+                continue
+            for c in constr_list:
+                retval += c.lvalue() + " " + c.op() + " " + c.rvalue()
         return retval
 
     def set_conn_on_tos(self, conn):
@@ -89,3 +103,13 @@ class ConstraintStack(object):
 
     def size(self):
         return len(self.items)
+
+    def get_constraints(self, insn):
+        for constr_list, instr in self.items:
+            if instr > insn:
+                break;
+            if len(constr_list) == 0:
+                continue
+            for c in constr_list:
+                yield c
+                

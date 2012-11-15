@@ -78,6 +78,7 @@ class __extend__(pyframe.PyFrame):
     conditional_fall_through = False
     fork_insns = []
     visited_insns = []
+    execution_stack = []
 
     ### opcode dispatch ###
 
@@ -87,6 +88,7 @@ class __extend__(pyframe.PyFrame):
         co_code = pycode.co_code
         self.visited_insns = []
         self.constraint_stack.clear()
+        self.execution_stack = []
 
         try:
             while True:
@@ -224,19 +226,14 @@ class __extend__(pyframe.PyFrame):
                     # last fork point
                     if len(self.fork_insns) > 0:
                         s_fork_path = self.fork_insns.pop()
-                        if not self.constraint_stack.is_empty():
-                            print "Constraints are: " + \
-                                self.constraint_stack.get_constr()
-                            self.constraint_stack.pop()
+                        esc = ""
+                        for s in self.execution_stack:
+                            esc += str(s)
+                        self.execution_stack = [i for i in self.constraint_stack.get_constraints(s_fork_path)]
+                        print "Constraints are: " + esc
                         print "Symbolic Execution Returned: " + \
                             str(self.popvalue())
                         return s_fork_path
-                    else:
-                        if not self.constraint_stack.size() == 0:
-                            print "Constraints are: " + \
-                                self.constraint_stack.get_constr()
-                            self.constraint_stack.pop()
-
                     # Clear the visited insns
                     self.visited_insns = []
                     raise Return
@@ -860,8 +857,15 @@ class __extend__(pyframe.PyFrame):
             cmp_op_s = "is_not"
         else:
             cmp_op_s = ""
+            
+        lval = str(w_1_s)
+        if w_2_s is not None:
+            rval = str(w_2_s)
+        else:
+            rval = "True"
 
-        self.w_constraint = Constraint(str(w_1_s), str(w_2_s), cmp_op_s)
+        self.w_constraint = Constraint(str(w_1_s), \
+                                           str(w_2_s), cmp_op_s)
 
         try:
             if w_1.is_symbolic() or w_2.is_symbolic():
@@ -869,7 +873,7 @@ class __extend__(pyframe.PyFrame):
         except:
             None
         # Put the constraint in a constraint stack
-        
+
         w_result = None
         for i, attr in unrolling_compare_dispatch_table:
             if i == testnum:
@@ -942,50 +946,68 @@ class __extend__(pyframe.PyFrame):
         return next_instr
 
     def POP_JUMP_IF_FALSE(self, target, next_instr):
-        # Since binary connectives are lost, they need to be
-        # determined from jump targets. If targets for constraints
-        # are identical, they are connected via /\, else it is \/
-        self.target_tracker_s = target
-
+        """
+        This opcode is most often called whenever we use chained
+        conditionals. If any of those conditionals evaluates to false
+        we stop checking the rest of the conditionals and proceed to
+        the target insn.
+        """
         w_value = self.popvalue()
+        
+        ret_addr = next_instr
+        fork_addr = target
+                    
         if not self.space.is_true(w_value):
-                if self.conditional_fall_through:
-                    self.conditional_fall_through = False
-                    self.w_constraint.augment_lvalue("not")
-                    self.constraint_stack.push(self.w_constraint)
-                    if next_instr not in self.visited_insns:
-                        self.fork_insns.append(next_instr)
-                        self.visited_insns.append(next_instr)
-                return target
+            ret_addr, fork_addr = fork_addr, ret_addr
         
         if self.conditional_fall_through:
             self.conditional_fall_through = False
-            self.constraint_stack.push(self.w_constraint)        
-            if target not in self.visited_insns:
-                self.fork_insns.append(target)
-                self.visited_insns.append(target)
-        return next_instr
+            if ret_addr == next_instr:
+                self.constraint_stack.push(\
+                    self.w_constraint.augment_lvalue("not"), \
+                        target)
+                self.execution_stack.append(self.w_constraint)
+            else:
+                self.constraint_stack.push(self.w_constraint, \
+                                               next_instr)
+                self.execution_stack.append(\
+                    self.w_constraint.augment_lvalue("not"))
+            if fork_addr not in self.visited_insns:
+                self.fork_insns.append(fork_addr)
+                self.visited_insns.append(fork_addr)
+
+        self.target_tracker_s = ret_addr
+
+        return ret_addr
 
     def POP_JUMP_IF_TRUE(self, target, next_instr):
-        self.target_tracker_s = target
-        
         w_value = self.popvalue()
+        
+        ret_addr = next_instr
+        fork_addr = target
+                    
         if self.space.is_true(w_value):
-                if self.conditional_fall_through:
-                    self.conditional_fall_through = False
-                    self.constraint_stack.push(self.w_constraint)
-                    if next_instr not in self.visited_insns:
-                        self.fork_insns.append(next_instr)
-                        self.visited_insns.append(next_instr)
-                return target
+            ret_addr, fork_addr = fork_addr, ret_addr
         
         if self.conditional_fall_through:
             self.conditional_fall_through = False
-            self.constraint_stack.push(self.w_constraint)        
-            if target not in self.visited_insns:
-                self.fork_insns.append(target)
-                self.visited_insns.append(target)
-        return next_instr
+            if ret_addr == next_instr:
+                self.constraint_stack.push(\
+                    self.w_constraint.augment_lvalue("not"), \
+                        target)
+                self.execution_stack.append(self.w_constraint)
+            else:
+                self.constraint_stack.push(self.w_constraint, \
+                                               next_instr)
+                self.execution_stack.append(\
+                    self.w_constraint.augment_lvalue("not"))
+            if fork_addr not in self.visited_insns:
+                self.fork_insns.append(fork_addr)
+                self.visited_insns.append(fork_addr)
+
+        self.target_tracker_s = ret_addr
+
+        return ret_addr
 
     def JUMP_IF_FALSE_OR_POP(self, target, next_instr):
         self.target_tracker_s = target
