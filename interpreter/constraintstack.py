@@ -68,6 +68,7 @@ class ConstraintStack(object):
                 return
 
     def push(self, constraint, insn):
+        print "Stack pushing: " + str(constraint) + " " + str(insn)
         for constr_list, instr in self.items:
             if instr == insn:
                 constr_list.append(constraint)
@@ -106,10 +107,8 @@ class ConstraintStack(object):
 
     def get_constraints(self, insn):
         for constr_list, instr in self.items:
-            if instr > insn:
-                break;
-            if len(constr_list) == 0:
-                continue
-            for c in constr_list:
-                yield c
-                
+            if instr == insn:
+                if len(constr_list) == 0:
+                    break
+                for c in constr_list:
+                    yield c
