@@ -11,7 +11,7 @@ class Constraint(object):
     __lvalue = None
     __op = None
     __connective = None
-    __negated = False
+    __explored = False
 
     def __init__(self, l, r, op):
         self.__rvalue = r
@@ -23,8 +23,6 @@ class Constraint(object):
 
     def __str__(self):
         s = self.__lvalue + " " + self.__op + " " + self.__rvalue
-        if self.__negated:
-            s = "not " + s
         return s
 
     def lvalue(self):
@@ -43,11 +41,11 @@ class Constraint(object):
     def conn(self):
         return self.__connective
 
-    def negate(self):
-        self.__negated = not self.__negated
+    def explored(self):
+        self.__explored = not self.__explored
 
-    def is_negated(self):
-        return self.__negated
+    def is_explored(self):
+        return self.__explored
 
 class ConstraintStack(object):
     """
@@ -68,7 +66,6 @@ class ConstraintStack(object):
                 return
 
     def push(self, constraint, insn):
-        print "Stack pushing: " + str(constraint) + " " + str(insn)
         for constr_list, instr in self.items:
             if instr == insn:
                 constr_list.append(constraint)
@@ -111,4 +108,38 @@ class ConstraintStack(object):
                 if len(constr_list) == 0:
                     break
                 for c in constr_list:
+                    if c.is_explored():
+                        continue
+                    c.explored()
                     yield c
+    
+    def get_constr(self, insn):
+        # Get the constraint list associated with an insn
+        for constr_list, instr in self.items:
+            if instr == insn:
+                return constr_list
+
+    def is_assoc_insn(self, c, insn):
+        constr_list = get_constr(self, insn)
+        if constr_list is None:
+            return False
+        if c in get_constr(self, insn):
+            return True
+        return False
+
+    def print_stack(self):
+        for constr, insn in self.items:
+            print "Constraints at fork " + str(insn)
+            for c in constr:
+                print str(c)
+
+    def remove_stale_constraints(self, exec_stack, insn):
+        print "Insn to remove: " + str(insn)
+        constr_list = self.get_constr(insn)
+        if constr_list is None:
+            return exec_stack
+        for c in exec_stack:
+            if c in constr_list:
+                idx = exec_stack.index(c)
+                return exec_stack[:idx]
+        return exec_stack

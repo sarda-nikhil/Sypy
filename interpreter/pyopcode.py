@@ -230,10 +230,13 @@ class __extend__(pyframe.PyFrame):
                         for s in self.execution_stack:
                             esc += str(s)
                         print "Fork path is: " + str(s_fork_path)
-                        self.execution_stack = self.execution_stack + ([i for i in self.constraint_stack.get_constraints(s_fork_path)])
+                        fork_path_constr = self.constraint_stack.get_constraints(s_fork_path)
+                        self.execution_stack = self.constraint_stack.remove_stale_constraints(self.execution_stack, self.target_tracker_s)
+                        self.execution_stack += fork_path_constr
                         print "Constraints are: " + esc
                         print "Symbolic Execution Returned: " + \
                             str(self.popvalue())
+                        self.target_tracker_s = s_fork_path
                         return s_fork_path
                     # Clear the visited insns
                     self.visited_insns = []
@@ -956,32 +959,48 @@ class __extend__(pyframe.PyFrame):
         1) Store current fork point and execute
         2) When returning, remove all constr associated with current
            fork point and all constraints in front of it from
-           execution stack
+           execution stack --> step is tricky
         3) Add all constraints associated with next fork point and
            continue
+
+        a) Store tuples of (target, next_instr) in a separate tracker
+           and store the target_tracker_s in a list.
+           When we hit a fork point, get the corresponding insn to
+           remove from the tuple tracker and then remove ALL the insns
+           in front of that insn from the target_tracker_list, along
+           with their corresponding constraints.
         """
         w_value = self.popvalue()
         
         ret_addr = next_instr
         fork_addr = target
-                    
+
         if not self.space.is_true(w_value):
             ret_addr, fork_addr = fork_addr, ret_addr
         
         if self.conditional_fall_through:
             negated_constraint = self.w_constraint.augment_lvalue("not")
+
             self.conditional_fall_through = False
             if ret_addr == next_instr:
-                self.constraint_stack.push(negated_constraint, fork_addr)
+                self.constraint_stack.push(negated_constraint, \
+                                               fork_addr)
+                self.constraint_stack.push(self.w_constraint, \
+                                               ret_addr)
+                self.w_constraint.explored()
                 self.execution_stack.append(self.w_constraint)
             else:
-                self.constraint_stack.push(self.w_constraint, fork_addr)
+                self.constraint_stack.push(self.w_constraint, \
+                                               fork_addr)
+                self.constraint_stack.push(negated_constraint, \
+                                               ret_addr)
+                negated_constraint.explored()
                 self.execution_stack.append(negated_constraint)
             if fork_addr not in self.visited_insns:
                 self.fork_insns.append(fork_addr)
                 self.visited_insns.append(fork_addr)
-
-        self.target_tracker_s = ret_addr
+            self.target_tracker_s = ret_addr
+            print "Target tracker: " + str(self.target_tracker_s)
 
         return ret_addr
 
