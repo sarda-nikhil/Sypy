@@ -79,6 +79,8 @@ class __extend__(pyframe.PyFrame):
     fork_insns = []
     visited_insns = []
     execution_stack = []
+    fork_tracker = []
+    exec_tracker = []
 
     ### opcode dispatch ###
 
@@ -172,6 +174,17 @@ class __extend__(pyframe.PyFrame):
             next_instr = block.handle(self, unroller)
             return next_instr
 
+    def get_insn_twin(self, insn):
+        if len(self.fork_tracker) == 0:
+            return None
+        for p in self.fork_tracker:
+            insn1, insn2 = p
+            if insn1 == insn:
+                return insn2
+            if insn2 == insn:
+                return insn1
+        return None
+
     def call_contextmanager_exit_function(self, w_func, w_typ, w_val, w_tb):
         return self.space.call_function(w_func, w_typ, w_val, w_tb)
 
@@ -221,22 +234,44 @@ class __extend__(pyframe.PyFrame):
                 w_returnvalue = self.popvalue()
                 block = self.unrollstack(SReturnValue.kind)
                 if block is None:
-                    self.pushvalue(w_returnvalue)   # XXX ping pong
+                    self.pushvalue(w_returnvalue)
                     # If this is the end of the road, backtrack to the
                     # last fork point
                     if len(self.fork_insns) > 0:
-                        s_fork_path = self.fork_insns.pop()
-                        esc = ""
-                        for s in self.execution_stack:
-                            esc += str(s)
-                        print "Fork path is: " + str(s_fork_path)
-                        fork_path_constr = self.constraint_stack.get_constraints(s_fork_path)
-                        self.execution_stack = self.constraint_stack.remove_stale_constraints(self.execution_stack, self.target_tracker_s)
-                        self.execution_stack += fork_path_constr
-                        print "Constraints are: " + esc
                         print "Symbolic Execution Returned: " + \
                             str(self.popvalue())
-                        self.target_tracker_s = s_fork_path
+
+                        s_fork_path = self.fork_insns.pop()
+                        
+                        esc = ""
+                        for constr in self.execution_stack:
+                            esc += str(constr) + " "
+                        print "Constraints: " + esc
+
+                        # Get the twin insn from the tuple tracker
+                        s_fork_path_t = \
+                            self.get_insn_twin(s_fork_path)
+
+                        for insn in self.exec_tracker:
+                            print "Insn on stack are: " + str(insn)
+
+                        if s_fork_path_t in self.exec_tracker:
+                            idx = \
+                                self.exec_tracker.index(s_fork_path_t)
+                            stale_exec_insns = self.exec_tracker[idx:]
+                            self.exec_tracker = self.exec_tracker[:idx]
+                            if len(stale_exec_insns) > 0:
+                                for stale_insn in stale_exec_insns:
+                                    self.execution_stack = \
+                                        self.constraint_stack.\
+                                        remove_stale_constraints(\
+                                        self.execution_stack, \
+                                            stale_insn)
+                        
+                        self.execution_stack = self.constraint_stack.\
+                            add_constraints(self.execution_stack,\
+                                                s_fork_path)
+                        self.exec_tracker.append(s_fork_path)
                         return s_fork_path
                     # Clear the visited insns
                     self.visited_insns = []
@@ -964,7 +999,7 @@ class __extend__(pyframe.PyFrame):
            continue
 
         a) Store tuples of (target, next_instr) in a separate tracker
-           and store the target_tracker_s in a list.
+           and store the current execution point in a list.
            When we hit a fork point, get the corresponding insn to
            remove from the tuple tracker and then remove ALL the insns
            in front of that insn from the target_tracker_list, along
@@ -979,7 +1014,8 @@ class __extend__(pyframe.PyFrame):
             ret_addr, fork_addr = fork_addr, ret_addr
         
         if self.conditional_fall_through:
-            negated_constraint = self.w_constraint.augment_lvalue("not")
+            negated_constraint = \
+                self.w_constraint.augment_lvalue("not")
 
             self.conditional_fall_through = False
             if ret_addr == next_instr:
@@ -999,9 +1035,8 @@ class __extend__(pyframe.PyFrame):
             if fork_addr not in self.visited_insns:
                 self.fork_insns.append(fork_addr)
                 self.visited_insns.append(fork_addr)
-            self.target_tracker_s = ret_addr
-            print "Target tracker: " + str(self.target_tracker_s)
-
+                self.fork_tracker.append((ret_addr, fork_addr))
+            self.exec_tracker.append(ret_addr)
         return ret_addr
 
     def POP_JUMP_IF_TRUE(self, target, next_instr):
@@ -1014,27 +1049,33 @@ class __extend__(pyframe.PyFrame):
             ret_addr, fork_addr = fork_addr, ret_addr
         
         if self.conditional_fall_through:
+            negated_constraint = \
+                self.w_constraint.augment_lvalue("not")
+
             self.conditional_fall_through = False
             if ret_addr == next_instr:
-                self.constraint_stack.push(\
-                    self.w_constraint.augment_lvalue("not"), \
-                        target)
+                self.constraint_stack.push(negated_constraint, \
+                                               fork_addr)
+                self.constraint_stack.push(self.w_constraint, \
+                                               ret_addr)
+                self.w_constraint.explored()
                 self.execution_stack.append(self.w_constraint)
             else:
                 self.constraint_stack.push(self.w_constraint, \
-                                               next_instr)
-                self.execution_stack.append(\
-                    self.w_constraint.augment_lvalue("not"))
+                                               fork_addr)
+                self.constraint_stack.push(negated_constraint, \
+                                               ret_addr)
+                negated_constraint.explored()
+                self.execution_stack.append(negated_constraint)
             if fork_addr not in self.visited_insns:
                 self.fork_insns.append(fork_addr)
                 self.visited_insns.append(fork_addr)
-
-        self.target_tracker_s = ret_addr
-
+                self.fork_tracker.append((ret_addr, fork_addr))
+            self.exec_tracker.append(ret_addr)
+        
         return ret_addr
 
     def JUMP_IF_FALSE_OR_POP(self, target, next_instr):
-        self.target_tracker_s = target
         
         w_value = self.peekvalue()
         if not self.space.is_true(w_value):
@@ -1043,7 +1084,6 @@ class __extend__(pyframe.PyFrame):
         return next_instr
 
     def JUMP_IF_TRUE_OR_POP(self, target, next_instr):
-        self.target_tracker_s = target
         
         w_value = self.peekvalue()
         if self.space.is_true(w_value):

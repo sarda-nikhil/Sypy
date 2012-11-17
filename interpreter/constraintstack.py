@@ -133,13 +133,26 @@ class ConstraintStack(object):
             for c in constr:
                 print str(c)
 
-    def remove_stale_constraints(self, exec_stack, insn):
-        print "Insn to remove: " + str(insn)
+    def print_stack_insn(self, insn):
+        for constr, i in self.items:
+            if i == insn:
+                print "Constraints for insn " + str(insn)
+                for c in constr:
+                    print str(c)
+                break
+
+    def remove_stale_constraints(self, execution_stack, insn):
         constr_list = self.get_constr(insn)
         if constr_list is None:
-            return exec_stack
-        for c in exec_stack:
-            if c in constr_list:
-                idx = exec_stack.index(c)
-                return exec_stack[:idx]
-        return exec_stack
+            return execution_stack
+        for c in constr_list:
+            print "Stale constr: " + str(c)
+            if c in execution_stack:
+                execution_stack.remove(c)
+        return execution_stack
+
+    def add_constraints(self, execution_stack, insn):
+        constr_list = self.get_constr(insn)
+        if constr_list is None:
+            return execution_stack
+        return execution_stack + constr_list
