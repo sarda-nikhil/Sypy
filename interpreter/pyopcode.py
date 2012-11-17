@@ -33,6 +33,7 @@ def unaryoperation(operationname):
 
 def binaryoperation(operationname):
     """NOT_RPYTHON"""
+    #TODO Implement symbolic counterparts for all binary ops
     def opimpl(self, *ignored):
         operation = getattr(self.space, operationname)
         w_2 = self.popvalue()
@@ -880,41 +881,42 @@ class __extend__(pyframe.PyFrame):
         w_1_s = self.popvalue_s()
         w_1 = self.popvalue()
 
-        if testnum == 0:
-            cmp_op_s = "<"
-        elif testnum == 1:
-            cmp_op_s = "<="
-        elif testnum == 2:
-            cmp_op_s = "=="
-        elif testnum == 3:
-            cmp_op_s = "!="
-        elif testnum == 4:
-            cmp_op_s = ">"
-        elif testnum == 5:
-            cmp_op_s = ">="
-        elif testnum == 8:
-            cmp_op_s = "is"
-        elif testnum == 9:
-            cmp_op_s = "is_not"
-        else:
-            cmp_op_s = ""
-            
-        lval = str(w_1_s)
-        if w_2_s is not None:
-            rval = str(w_2_s)
-        else:
-            rval = "True"
-
-        self.w_constraint = Constraint(str(w_1_s), \
-                                           str(w_2_s), cmp_op_s)
-
         try:
             if w_1.is_symbolic() or w_2.is_symbolic():
                 self.conditional_fall_through = True
+
+            if testnum == 0:
+                cmp_op_s = "<"
+            elif testnum == 1:
+                cmp_op_s = "<="
+            elif testnum == 2:
+                cmp_op_s = "=="
+            elif testnum == 3:
+                cmp_op_s = "!="
+            elif testnum == 4:
+                cmp_op_s = ">"
+            elif testnum == 5:
+                cmp_op_s = ">="
+            elif testnum == 8:
+                cmp_op_s = "is"
+            elif testnum == 9:
+                cmp_op_s = "is_not"
+            else:
+                cmp_op_s = ""
+                
+            lval = str(w_1_s)
+            if w_2_s is not None:
+                rval = str(w_2_s)
+            else:
+                if isinstance(w_2, W_BoolObject):
+                    rval = w_2.boolval
+                elif isinstance(w_2, W_IntObject):
+                    rval = w_2.intval
+
+            self.w_constraint = Constraint(lval, rval, cmp_op_s)
         except:
             None
-        # Put the constraint in a constraint stack
-
+        
         w_result = None
         for i, attr in unrolling_compare_dispatch_table:
             if i == testnum:
@@ -1075,7 +1077,7 @@ class __extend__(pyframe.PyFrame):
                 self.visited_insns.append(fork_addr)
                 self.fork_tracker.append((ret_addr, fork_addr))
             self.exec_tracker.append(ret_addr)
-        
+
         return ret_addr
 
     def JUMP_IF_FALSE_OR_POP(self, target, next_instr):
