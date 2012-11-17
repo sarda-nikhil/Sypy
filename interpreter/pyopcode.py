@@ -191,6 +191,45 @@ class __extend__(pyframe.PyFrame):
     def call_contextmanager_exit_function(self, w_func, w_typ, w_val, w_tb):
         return self.space.call_function(w_func, w_typ, w_val, w_tb)
 
+    def call_symbolic(self, w_returnvalue):
+        if len(self.execution_stack) > 0:
+            esc = ""
+            for constr in self.execution_stack:
+                esc += str(constr) + " "
+            print "Constraints: " + esc
+            print "Symbolic Execution Returned: " + \
+                str(self.popvalue())
+            self.pushvalue(w_returnvalue)
+                    
+        if len(self.fork_insns) > 0:
+                        
+            s_fork_path = self.fork_insns.pop()
+            
+            # Get the twin insn from the tuple tracker
+            s_fork_path_t = \
+                self.get_insn_twin(s_fork_path)
+
+            if s_fork_path_t in self.exec_tracker:
+                idx = \
+                    self.exec_tracker.index(s_fork_path_t)
+                stale_exec_insns = self.exec_tracker[idx:]
+                self.exec_tracker = self.exec_tracker[:idx]
+                if len(stale_exec_insns) > 0:
+                    for stale_insn in stale_exec_insns:
+                        self.execution_stack = \
+                            self.constraint_stack.\
+                            remove_stale_constraints(\
+                            self.execution_stack, \
+                                stale_insn)
+                        
+                self.execution_stack = self.constraint_stack.\
+                    add_constraints(self.execution_stack,\
+                                        s_fork_path)
+                self.exec_tracker.append(s_fork_path)
+                self.popvalue()
+                return s_fork_path
+        return None
+
     @jit.unroll_safe
     def dispatch_bytecode(self, co_code, next_instr, ec):
         space = self.space
@@ -238,45 +277,9 @@ class __extend__(pyframe.PyFrame):
                 block = self.unrollstack(SReturnValue.kind)
                 if block is None:
                     self.pushvalue(w_returnvalue)
-                    # If this is the end of the road, backtrack to the
-                    # last fork point
-                    if len(self.execution_stack) > 0:
-                        esc = ""
-                        for constr in self.execution_stack:
-                            esc += str(constr) + " "
-                        print "Constraints: " + esc
-                        print "Symbolic Execution Returned: " + \
-                            str(self.popvalue())
-                        self.pushvalue(w_returnvalue)
-                    
-                    if len(self.fork_insns) > 0:
-                        
-                        s_fork_path = self.fork_insns.pop()
-
-                        # Get the twin insn from the tuple tracker
-                        s_fork_path_t = \
-                            self.get_insn_twin(s_fork_path)
-
-                        if s_fork_path_t in self.exec_tracker:
-                            idx = \
-                                self.exec_tracker.index(s_fork_path_t)
-                            stale_exec_insns = self.exec_tracker[idx:]
-                            self.exec_tracker = self.exec_tracker[:idx]
-                            if len(stale_exec_insns) > 0:
-                                for stale_insn in stale_exec_insns:
-                                    self.execution_stack = \
-                                        self.constraint_stack.\
-                                        remove_stale_constraints(\
-                                        self.execution_stack, \
-                                            stale_insn)
-                        
-                        self.execution_stack = self.constraint_stack.\
-                            add_constraints(self.execution_stack,\
-                                                s_fork_path)
-                        self.exec_tracker.append(s_fork_path)
-                        self.popvalue()
-                        return s_fork_path
-                    # Clear the visited insns
+                    s_return = self.call_symbolic(w_returnvalue)
+                    if s_return is not None:
+                        return s_return
                     self.visited_insns = []
                     raise Return
                 else:
@@ -912,7 +915,7 @@ class __extend__(pyframe.PyFrame):
                     rval = w_2.boolval
                 elif isinstance(w_2, W_IntObject):
                     rval = w_2.intval
-
+            print lval + " " + rval
             self.w_constraint = Constraint(lval, rval, cmp_op_s)
         except:
             None
