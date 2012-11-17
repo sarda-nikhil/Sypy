@@ -81,6 +81,7 @@ class __extend__(pyframe.PyFrame):
     execution_stack = []
     fork_tracker = []
     exec_tracker = []
+    constraint_stack = ConstraintStack()
 
     ### opcode dispatch ###
 
@@ -91,6 +92,7 @@ class __extend__(pyframe.PyFrame):
         self.visited_insns = []
         self.constraint_stack.clear()
         self.execution_stack = []
+        self.exec_tracker = []
 
         try:
             while True:
@@ -237,23 +239,22 @@ class __extend__(pyframe.PyFrame):
                     self.pushvalue(w_returnvalue)
                     # If this is the end of the road, backtrack to the
                     # last fork point
-                    if len(self.fork_insns) > 0:
-                        print "Symbolic Execution Returned: " + \
-                            str(self.popvalue())
-
-                        s_fork_path = self.fork_insns.pop()
-                        
+                    if len(self.execution_stack) > 0:
                         esc = ""
                         for constr in self.execution_stack:
                             esc += str(constr) + " "
                         print "Constraints: " + esc
+                        print "Symbolic Execution Returned: " + \
+                            str(self.popvalue())
+                        self.pushvalue(w_returnvalue)
+                    
+                    if len(self.fork_insns) > 0:
+                        
+                        s_fork_path = self.fork_insns.pop()
 
                         # Get the twin insn from the tuple tracker
                         s_fork_path_t = \
                             self.get_insn_twin(s_fork_path)
-
-                        for insn in self.exec_tracker:
-                            print "Insn on stack are: " + str(insn)
 
                         if s_fork_path_t in self.exec_tracker:
                             idx = \
@@ -272,6 +273,7 @@ class __extend__(pyframe.PyFrame):
                             add_constraints(self.execution_stack,\
                                                 s_fork_path)
                         self.exec_tracker.append(s_fork_path)
+                        self.popvalue()
                         return s_fork_path
                     # Clear the visited insns
                     self.visited_insns = []

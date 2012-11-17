@@ -68,7 +68,8 @@ class ConstraintStack(object):
     def push(self, constraint, insn):
         for constr_list, instr in self.items:
             if instr == insn:
-                constr_list.append(constraint)
+                if not constraint in constr_list:
+                    constr_list.append(constraint)
                 return
         self.items.append(([constraint], insn))
 
@@ -146,7 +147,6 @@ class ConstraintStack(object):
         if constr_list is None:
             return execution_stack
         for c in constr_list:
-            print "Stale constr: " + str(c)
             if c in execution_stack:
                 execution_stack.remove(c)
         return execution_stack
