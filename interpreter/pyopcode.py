@@ -1056,19 +1056,20 @@ class __extend__(pyframe.PyFrame):
 
             self.conditional_fall_through = False
             if ret_addr == next_instr:
-                self.constraint_stack.push(negated_constraint, \
-                                               fork_addr)
-                self.constraint_stack.push(self.w_constraint, \
-                                               ret_addr)
-                self.w_constraint.explored()
-                self.execution_stack.append(self.w_constraint)
-            else:
                 self.constraint_stack.push(self.w_constraint, \
                                                fork_addr)
                 self.constraint_stack.push(negated_constraint, \
                                                ret_addr)
                 negated_constraint.explored()
                 self.execution_stack.append(negated_constraint)
+
+            else:
+                self.constraint_stack.push(negated_constraint, \
+                                               fork_addr)
+                self.constraint_stack.push(self.w_constraint, \
+                                               ret_addr)
+                self.w_constraint.explored()
+                self.execution_stack.append(self.w_constraint)
             if fork_addr not in self.visited_insns:
                 self.fork_insns.append(fork_addr)
                 self.visited_insns.append(fork_addr)
