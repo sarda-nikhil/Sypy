@@ -917,8 +917,12 @@ class __extend__(pyframe.PyFrame):
                     rval = str(w_2.boolval)
                 elif type(w_2).__name__ == 'W_IntObject':
                     rval = str(w_2.intval)
+                elif type(w_2).__name__ == 'W_LongObject':
+                    rval = str(w_2.num)
+                elif type(w_2).__name__ == 'W_FloatObject':
+                    rval = str(w_2.floatval)
                 else:
-                    rval = "True"
+                    rval = "None"
             self.w_constraint = Constraint(lval, rval, cmp_op_s)
         except Exception, e:
             # If things go wrong, we don't want any chaos later on
