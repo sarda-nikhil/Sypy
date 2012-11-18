@@ -906,20 +906,24 @@ class __extend__(pyframe.PyFrame):
                 cmp_op_s = "is_not"
             else:
                 cmp_op_s = ""
-                
+                    
             lval = str(w_1_s)
             if w_2_s is not None:
                 rval = str(w_2_s)
             else:
-                if isinstance(w_2, W_BoolObject):
-                    rval = w_2.boolval
-                elif isinstance(w_2, W_IntObject):
-                    rval = w_2.intval
-            print lval + " " + rval
+                # In order to prevent circular dependency, we resort
+                # to reflection for type checking
+                if type(w_2).__name__ == 'W_BoolObject':
+                    rval = str(w_2.boolval)
+                elif type(w_2).__name__ == 'W_IntObject':
+                    rval = str(w_2.intval)
+                else:
+                    rval = "True"
             self.w_constraint = Constraint(lval, rval, cmp_op_s)
-        except:
-            None
-        
+        except Exception, e:
+            # If things go wrong, we don't want any chaos later on
+            self.conditional_fall_through = False
+
         w_result = None
         for i, attr in unrolling_compare_dispatch_table:
             if i == testnum:
