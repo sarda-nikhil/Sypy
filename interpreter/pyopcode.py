@@ -191,11 +191,37 @@ class __extend__(pyframe.PyFrame):
     def call_contextmanager_exit_function(self, w_func, w_typ, w_val, w_tb):
         return self.space.call_function(w_func, w_typ, w_val, w_tb)
 
+    def evaluate_constraints(self):
+        import imp
+        imp.load_compiled('z3', \
+                              '/home/nikhil/Projects/Z3/build/z3.pyc')
+        import z3
+        z3_variables = []
+        z3_variables_decl = ""
+        z3_solve_str = "z3.solve("
+        
+        for c in self.execution_stack:
+            if c.is_lvalue_s() and \
+                    (c.lvalue(), c.type()) not in z3_variables:
+                z3_variables.append((c.lvalue(), c.type()))
+            elif c.is_rvalue_s() and \
+                    (c.rvalue(), c.type()) not in z3_variables:
+                z3_variables.append((c.rvalue(), c.type()))
+            
+            z3_solve_str += str(c) + ","
+        
+        z3_solve_str += ")"
+        z3_variables = sorted(z3_variables, key=lambda t: t[1])
+        z3_variables_decl = 'x, y = z3.Reals(\'x y\'); '
+        exec(z3_variables_decl + z3_solve_str)
+        #print z3_solve_str
+
     def call_symbolic(self, w_returnvalue):
         if len(self.execution_stack) > 0:
             esc = ""
             for constr in self.execution_stack:
                 esc += str(constr) + " "
+            self.evaluate_constraints()
             print "Constraints: " + esc
             print "Symbolic Execution Returned: " + \
                 str(self.popvalue())
@@ -1030,7 +1056,7 @@ class __extend__(pyframe.PyFrame):
         
         if self.conditional_fall_through:
             negated_constraint = \
-                self.w_constraint.augment_lvalue("not")
+                self.w_constraint.augment_lvalue("not ")
 
             self.conditional_fall_through = False
             if ret_addr == next_instr:
@@ -1065,7 +1091,7 @@ class __extend__(pyframe.PyFrame):
         
         if self.conditional_fall_through:
             negated_constraint = \
-                self.w_constraint.augment_lvalue("not")
+                self.w_constraint.augment_lvalue("not ")
 
             self.conditional_fall_through = False
             if ret_addr == next_instr:

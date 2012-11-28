@@ -42,7 +42,7 @@ class Constraint(object):
         return self.__r_s
 
     def augment_lvalue(self, s):
-        return Constraint("not " + self.lvalue(), \
+        return Constraint(s + self.lvalue(), \
                               self.rvalue(), self.op())
 
     def op(self):
@@ -100,6 +100,7 @@ class ConstraintStack(object):
                 continue
             for c in constr_list:
                 retval += c.lvalue() + " " + c.op() + " " + c.rvalue()
+        self.solve_for_constr()
         return retval
 
     def set_conn_on_tos(self, conn):
