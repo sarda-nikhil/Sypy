@@ -11,12 +11,16 @@ class Constraint(object):
     __lvalue = None
     __op = None
     __connective = None
+    __type = None
     __explored = False
 
-    def __init__(self, l, r, op):
+    def __init__(self, l, r, op, l_s=True, r_s=False, t="Real"):
         self.__rvalue = r
+        self.__r_s = r_s
         self.__lvalue = l
+        self.__l_s = l_s
         self.__op = op
+        self.__c_type = t
 
     def set_connective(self, conn):
         self.__connective = conn
@@ -28,8 +32,14 @@ class Constraint(object):
     def lvalue(self):
         return self.__lvalue
 
+    def is_lvalue_s(self):
+        return self.__l_s
+
     def rvalue(self):
         return self.__rvalue
+
+    def is_rvalue_s(self):
+        return self.__r_s
 
     def augment_lvalue(self, s):
         return Constraint("not " + self.lvalue(), \
@@ -40,6 +50,9 @@ class Constraint(object):
 
     def conn(self):
         return self.__connective
+
+    def type(self):
+        return self.__type
 
     def explored(self):
         self.__explored = not self.__explored

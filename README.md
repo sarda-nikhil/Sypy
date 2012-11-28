@@ -7,3 +7,8 @@ Currently Sypy generates constraints for if statements involving integer values.
 have not been tested yet. Function evaluation has not been tested yet. Besides, supporting arbitrary functions is probably not a good idea.
 
 The most appropriate way would be to determine all possible return values of a function and substitute those values in the constraints.
+
+
+TODO:
+
+The most important thing to do right now is to interleave symbolic execution code in the binary operations.
