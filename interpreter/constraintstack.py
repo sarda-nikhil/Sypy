@@ -14,13 +14,13 @@ class Constraint(object):
     __type = None
     __explored = False
 
-    def __init__(self, l, r, op, l_s=True, r_s=False, t="Real"):
+    def __init__(self, l, r, op, l_s=True, r_s=False, t="Reals"):
         self.__rvalue = r
         self.__r_s = r_s
         self.__lvalue = l
         self.__l_s = l_s
         self.__op = op
-        self.__c_type = t
+        self.__type = t
 
     def set_connective(self, conn):
         self.__connective = conn
@@ -59,6 +59,31 @@ class Constraint(object):
 
     def is_explored(self):
         return self.__explored
+
+    def negated(self):
+        neg_op = self.neg_op(self.__op)
+        negated_constr = Constraint(self.lvalue(), \
+                                        self.rvalue(), neg_op)
+        return negated_constr
+
+    def neg_op(self, op):
+        if op == "<":
+            return ">="
+        elif op == ">":
+            return "<="
+        elif op == "==":
+            return "!="
+        elif op == ">=":
+            return "<"
+        elif op == "<=":
+            return ">"
+        elif op == "!=":
+            return "=="
+        elif op == "is":
+            return "is_not"
+        elif op == "is_not":
+            return "is"
+        return None
 
 class ConstraintStack(object):
     """

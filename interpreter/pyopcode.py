@@ -5,6 +5,8 @@ The rest, dealing with variables in optimized ways, is in nestedscope.py.
 """
 
 import sys
+import itertools
+import operator
 from pypy.interpreter.error import OperationError, operationerrfmt
 from pypy.interpreter.baseobjspace import Wrappable
 from pypy.interpreter import gateway, function, eval, pyframe, pytraceback
@@ -209,20 +211,33 @@ class __extend__(pyframe.PyFrame):
                 z3_variables.append((c.rvalue(), c.type()))
             
             z3_solve_str += str(c) + ","
-        
         z3_solve_str += ")"
+        
         z3_variables = sorted(z3_variables, key=lambda t: t[1])
-        z3_variables_decl = 'x, y = z3.Reals(\'x y\'); '
+        z3_variables = [list(t) for key,t in \
+             itertools.groupby(z3_variables, operator.itemgetter(1))]
+        
+        var_names = ""
+        arg_str = ""
+        z3_variables_decl = ""
+        
+        for var_group in z3_variables:
+            # For each variable group, construct the decl string
+            for var in var_group:
+                var_names += var[0] + ","
+                arg_str += var[0] + " "
+            z3_variables_decl += var_names[:-1] + \
+                " = z3.Reals(\'" + arg_str[:-1] + "\');"
         exec(z3_variables_decl + z3_solve_str)
-        #print z3_solve_str
 
     def call_symbolic(self, w_returnvalue):
         if len(self.execution_stack) > 0:
             esc = ""
             for constr in self.execution_stack:
                 esc += str(constr) + " "
-            self.evaluate_constraints()
             print "Constraints: " + esc
+            print "Solution is: "
+            self.evaluate_constraints()
             print "Symbolic Execution Returned: " + \
                 str(self.popvalue())
             self.pushvalue(w_returnvalue)
@@ -1056,7 +1071,7 @@ class __extend__(pyframe.PyFrame):
         
         if self.conditional_fall_through:
             negated_constraint = \
-                self.w_constraint.augment_lvalue("not ")
+                self.w_constraint.negated()
 
             self.conditional_fall_through = False
             if ret_addr == next_instr:
@@ -1091,7 +1106,7 @@ class __extend__(pyframe.PyFrame):
         
         if self.conditional_fall_through:
             negated_constraint = \
-                self.w_constraint.augment_lvalue("not ")
+                self.w_constraint.negated()
 
             self.conditional_fall_through = False
             if ret_addr == next_instr:
