@@ -89,6 +89,11 @@ def retry_to_w_long(space, parser, base=0):
     return newlong(space, bigint)
 
 def descr__new__(space, w_inttype, w_x=0, w_s='', w_symbolic=False, w_base=gateway.NoneNotWrapped):
+    """
+    This is the constructor for creating an integer type. The values passed in
+    the parameters are not Python types but PyPy types. This little detail
+    can trip up any person new to hacking on PyPy.
+    """
     from pypy.objspace.std.intobject import W_IntObject
     w_longval = None
     w_value = w_x     # 'x' is the keyword argument name in CPython
