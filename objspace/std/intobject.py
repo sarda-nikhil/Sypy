@@ -36,15 +36,16 @@ class W_AbstractIntObject(W_Object):
 
 
 class W_IntObject(W_AbstractIntObject):
-    __slots__ = ['intval', '__is_symbolic']
+    __slots__ = ['intval', '__is_symbolic', 'symval']
     _immutable_fields_ = ['intval']
 
     from pypy.objspace.std.inttype import int_typedef as typedef
 
-    def __init__(w_self, intval, is_symbolic=False):
+    def __init__(w_self, intval, is_symbolic=False, symval=''):
         assert is_valid_int(intval)
         w_self.intval = intval
         w_self.__is_symbolic = is_symbolic
+        w_self.symval = symval
 
     def __repr__(w_self):
         """ representation for debugging purposes """
@@ -88,7 +89,9 @@ registerimplementation(W_IntObject)
 
 def repr__Int(space, w_int1):
     a = w_int1.intval
-    res = str(a) + " Symbolic: " + str(w_int1.is_symbolic())
+    res = str(a)
+    if w_int1.is_symbolic():
+        res += " Symbolic Value: " + w_int1.symval._value
     return space.wrap(res)
 
 str__Int = repr__Int
