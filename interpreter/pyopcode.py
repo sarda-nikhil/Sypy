@@ -660,9 +660,10 @@ class __extend__(pyframe.PyFrame):
     @jit.unroll_safe
     def RAISE_VARARGS(self, nbargs, next_instr):
         # When we are in an exception, we return to the last forked insn
-        s_return = self.call_symbolic(w_returnvalue)
-        if s_return is not None:
-            return s_return
+        if len(self.fork_insns) > 0:
+            s_return = self.call_symbolic()
+            if s_return is not None:
+                return s_return
 
         space = self.space
         if nbargs == 0:
